@@ -20,7 +20,7 @@
 
 </head>
 
-<body style="background: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);">
+<body style="background-image: url('img/sekolah/smk.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 
   <div class="container">
 
@@ -52,7 +52,7 @@
                     <input type="submit" name="submit" class="btn btn-primary btn-user btn-block" value="Masuk">
                   </form>
                   <hr>
-                  <br><center><p>Repost by <a href='https://stokcoding.com/' title='StokCoding.com' target='_blank'>StokCoding.com</a></p></center>
+                  <!-- <br><center><p>Repost by <a href='https://stokcoding.com/' title='StokCoding.com' target='_blank'>StokCoding.com</a></p></center> -->
                   
                 </div>
 

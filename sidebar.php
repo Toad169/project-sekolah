@@ -30,19 +30,11 @@
         Transaksi
       </div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
+      <!-- Nav Item - Transaksi (Pendapatan & Pengeluaran) -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pendapatan.php">
-          <i class="fas fa-fw fa-arrow-up"></i>
-          <span>Pendapatan</span>
-        </a>
-      </li>
-
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pengeluaran.php" >
-          <i class="fas fa-fw fa-arrow-down"></i>
-          <span>Pengeluaran</span>
+        <a class="nav-link collapsed" href="transaksi.php">
+          <i class="fas fa-fw fa-exchange-alt"></i>
+          <span>Pendapatan &amp; Pengeluaran</span>
         </a>
       </li>
 

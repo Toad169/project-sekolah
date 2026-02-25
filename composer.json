@@ -1,0 +1,17 @@
+{
+    "name": "akbar/keuangan",
+    "description": "tugas sekolah",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Akbar\\Keuangan\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Toad169",
+            "email": "mamangpunten893@gmail.com"
+        }
+    ],
+    "require": {}
+}
