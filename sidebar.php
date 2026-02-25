@@ -30,11 +30,18 @@
         Transaksi
       </div>
 
+      <!-- Nav Item - Pembayaran Kas -->
+      <li class="nav-item">
+        <a class="nav-link" href="pembayaran.php">
+          <i class="fas fa-fw fa-list-alt"></i>
+          <span>Pembayaran Kas</span></a>
+      </li>
+
       <!-- Nav Item - Transaksi (Pendapatan & Pengeluaran) -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="transaksi.php">
           <i class="fas fa-fw fa-exchange-alt"></i>
-          <span>Pendapatan &amp; Pengeluaran</span>
+          <span>Pemasukan &amp; Pengeluaran</span>
         </a>
       </li>
 
@@ -62,12 +69,14 @@
         Tagihan
       </div>
 
-      <!-- Nav Item - Charts -->
+      <!-- Nav Item - Hutang -->
       <li class="nav-item">
         <a class="nav-link" href="hutang.php">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Hutang</span></a>
       </li>
+
+      
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">

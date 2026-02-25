@@ -12,7 +12,7 @@ require 'cek-sesi.php';
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Transaksi - Pendapatan & Pengeluaran</title>
+  <title>Transaksi - Pemasukan & Pengeluaran</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -75,7 +75,7 @@ $tujuhhari = mysqli_fetch_array($tujuhhari);
       <ul class="nav nav-tabs mb-4" id="transaksiTab" role="tablist">
         <li class="nav-item">
           <a class="nav-link active" id="pendapatan-tab" data-toggle="tab" href="#tab-pendapatan" role="tab" aria-controls="tab-pendapatan" aria-selected="true">
-            <i class="fas fa-arrow-up"></i> Pendapatan
+            <i class="fas fa-arrow-up"></i> Pemasukan
           </a>
         </li>
         <li class="nav-item">
@@ -92,7 +92,7 @@ $tujuhhari = mysqli_fetch_array($tujuhhari);
           <div class="row">
 
             <!-- Sumber Pendapatan -->
-            <div class="col-lg-6 mb-4">
+            <!-- <div class="col-lg-12 mb-4">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Sumber Pendapatan</h6>
@@ -193,10 +193,10 @@ echo '
 ?>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <!-- Catatan Pendapatan -->
-            <div class="col-lg-6">
+            <!-- <div class="col-lg-6">
               <div class="card shadow mb-4">
                 <a href="#collapsePendapatanCatatan1" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapsePendapatanCatatan1">
                   <h6 class="m-0 font-weight-bold text-primary">Catatan 1</h6>
@@ -225,10 +225,10 @@ echo $catatan2['catatan'];
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <!-- Tabel Pemasukan -->
-            <div class="col-xl-8 col-lg-7">
+            <div class="col-xl-8 col-lg-12">
               <button type="button" class="btn btn-success" style="margin:5px" data-toggle="modal" data-target="#myModalTambahPemasukan">
                 <i class="fa fa-plus"> Pemasukan</i>
               </button><br>
@@ -246,7 +246,7 @@ echo $catatan2['catatan'];
                           <th>Tanggal</th>
                           <th>Jumlah</th>
                           <th>Sumber</th>
-                          <th>Aksi</th>
+                          <th>Edit</th>
                         </tr>
                       </thead>
                       <tfoot>
@@ -255,7 +255,7 @@ echo $catatan2['catatan'];
                           <th>Tanggal</th>
                           <th>Jumlah</th>
                           <th>Sumber</th>
-                          <th>Aksi</th>
+                          <th>Edit</th>
                         </tr>
                       </tfoot>
                       <tbody>
@@ -382,7 +382,7 @@ while ($data = mysqli_fetch_assoc($query)) {
           <div class="row">
 
             <!-- Sumber Pengeluaran -->
-            <div class="col-lg-6 mb-4">
+            <!-- <div class="col-lg-6 mb-4">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Sumber Pengeluaran</h6>
@@ -483,10 +483,10 @@ echo '
 ?>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <!-- Catatan Pengeluaran -->
-            <div class="col-lg-6">
+            <!-- <div class="col-lg-6">
               <div class="card shadow mb-4">
                 <a href="#collapsePengeluaranCatatan1" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapsePengeluaranCatatan1">
                   <h6 class="m-0 font-weight-bold text-primary">Catatan 1</h6>
@@ -515,13 +515,13 @@ echo $catatan['catatan'];
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
           </div>
 
           <!-- Area Chart Pengeluaran -->
           <div class="row">
-            <div class="col-xl-8 col-lg-7">
+            <div class="col-xl-8 col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Pengeluaran 7 Hari Terakhir</h6>
@@ -555,7 +555,7 @@ echo $catatan['catatan'];
                           <th>Tanggal</th>
                           <th>Jumlah</th>
                           <th>Sumber</th>
-                          <th>Aksi</th>
+                          <th>Edit</th>
                         </tr>
                       </thead>
                       <tfoot>
@@ -564,7 +564,7 @@ echo $catatan['catatan'];
                           <th>Tanggal</th>
                           <th>Jumlah</th>
                           <th>Sumber</th>
-                          <th>Aksi</th>
+                          <th>Edit</th>
                         </tr>
                       </tfoot>
                       <tbody>
