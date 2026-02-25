@@ -154,7 +154,7 @@ $check4 = $row['minggu_4'] > 0 ? 'checked' : '';
                             <label class="mr-2"><input type="checkbox" name="minggu_2" value="1" <?= $check2; ?>> Minggu 2</label>
                             <label class="mr-2"><input type="checkbox" name="minggu_3" value="1" <?= $check3; ?>> Minggu 3</label>
                             <label class="mr-2"><input type="checkbox" name="minggu_4" value="1" <?= $check4; ?>> Minggu 4</label>
-                            <small class="form-text text-muted mt-2">Setiap minggu bernilai Rp. 10.000, total kas bulanan Rp. 40.000.</small>
+                            <small class="form-text text-muted mt-2">Setiap minggu bernilai Rp. 2.000, total kas bulanan Rp. 40.000.</small>
                           </div>
 
                           <div class="modal-footer">
@@ -207,7 +207,7 @@ $check4 = $row['minggu_4'] > 0 ? 'checked' : '';
                   <label class="mr-2"><input type="checkbox" name="minggu_2" value="1"> Minggu 2</label>
                   <label class="mr-2"><input type="checkbox" name="minggu_3" value="1"> Minggu 3</label>
                   <label class="mr-2"><input type="checkbox" name="minggu_4" value="1"> Minggu 4</label>
-                  <small class="form-text text-muted mt-2">Setiap minggu bernilai Rp. 10.000, total kas bulanan Rp. 40.000.</small>
+                  <small class="form-text text-muted mt-2">Setiap minggu bernilai Rp. 2.000, total kas bulanan Rp. 40.000.</small>
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-success">Tambah</button>
