@@ -18,6 +18,10 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+  <!-- Tailwind CSS, HTMX, AlpineJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+  <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 
 <body style="background-image: url('img/sekolah/smk.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">

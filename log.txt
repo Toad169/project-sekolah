@@ -6,3 +6,5 @@
 
 [2022-24-08:22:33:33] Nama Admin : saiful => Edit Hutang => 17 => Sukses 
 
+[2026-26-02:03:14:42] Nama Admin : saiful => Edit Pemasukan => 1 => Sukses Edit
+

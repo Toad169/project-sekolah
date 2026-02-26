@@ -12,7 +12,7 @@ require 'cek-sesi.php';
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Tables</title>
+  <title>Kelola Admin</title>
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -23,6 +23,11 @@ require 'cek-sesi.php';
 
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+  <!-- Tailwind CSS, HTMX, AlpineJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+  <script src="//unpkg.com/alpinejs" defer></script>
 
 </head>
 
@@ -37,13 +42,13 @@ require 'cek-sesi.php';
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-<button type="button" class="btn btn-success" style="margin:5px" data-toggle="modal" data-target="#myModalTambah"><i class="fa fa-plus"> Karyawan</i></button><br>
+<button type="button" class="btn btn-success" style="margin:5px" data-toggle="modal" data-target="#myModalTambah"><i class="fa fa-plus"> Anggota</i></button><br>
 
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Daftar Karyawan</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Daftar Anggota</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -52,7 +57,6 @@ require 'cek-sesi.php';
                     <tr>
                       <th>Nama</th>
                       <th>Posisi</th>
-                      <th>Alamat</th>
                       <th>Umur</th>
                       <th>Kontak</th>
                       <th>Aksi</th>
@@ -62,7 +66,6 @@ require 'cek-sesi.php';
                     <tr>
                       <th>Nama</th>
                       <th>Posisi</th>
-                      <th>Alamat</th>
                       <th>Umur</th>
                       <th>Kontak</th>
                       <th>Aksi</th>
@@ -78,7 +81,6 @@ while ($data = mysqli_fetch_assoc($query))
                     <tr>
                       <td><?=$data['nama']?></td>
                       <td><?=$data['posisi']?></td>
-                      <td><?=$data['alamat']?></td>
                       <td><?=$data['umur']?></td>
                       <td><?=$data['kontak']?></td>
 					  <td>
@@ -93,7 +95,7 @@ while ($data = mysqli_fetch_assoc($query))
 <!-- Modal content-->
 <div class="modal-content">
 <div class="modal-header">
-<h4 class="modal-title">Ubah Data Karyawan</h4>
+<h4 class="modal-title">Ubah Data Anggota</h4>
 <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <div class="modal-body">
@@ -117,11 +119,6 @@ while ($row = mysqli_fetch_array($query_edit)) {
 <div class="form-group">
 <label>Posisi</label>
 <input type="text" name="posisi" class="form-control" value="<?php echo $row['posisi']; ?>">      
-</div>
-
-<div class="form-group">
-<label>Alamat</label>
-<input type="text" name="alamat" class="form-control" value="<?php echo $row['alamat']; ?>">      
 </div>
 
 <div class="form-group">
@@ -153,7 +150,11 @@ while ($row = mysqli_fetch_array($query_edit)) {
 
 
 
- <!-- Modal -->
+<?php               
+} 
+?>
+
+ <!-- Modal Tambah Anggota (di luar loop) -->
   <div id="myModalTambah" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -161,7 +162,7 @@ while ($row = mysqli_fetch_array($query_edit)) {
       <div class="modal-content">
         <!-- heading modal -->
         <div class="modal-header">
-          <h4 class="modal-title">Tambah Karyawan</h4>
+          <h4 class="modal-title">Tambah Anggota</h4>
 		    <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <!-- body modal -->
@@ -171,8 +172,6 @@ while ($row = mysqli_fetch_array($query_edit)) {
          <input type="text" class="form-control" name="nama">
 		Posisi : 
          <input type="text" class="form-control" name="posisi">
-		Alamat : 
-         <input type="text" class="form-control" name="alamat">
 		Umur : 
          <input type="number" class="form-control" name="umur">
 		Kontak : 
@@ -188,11 +187,6 @@ while ($row = mysqli_fetch_array($query_edit)) {
 
     </div>
   </div>
-
-
-<?php               
-} 
-?>
                   </tbody>
                 </table>
               </div>

@@ -14,18 +14,18 @@ function write_log($log){
 }
 
 $id = (int) $_GET['id_pemasukan'];
-$tgl = abs((int) $_GET['tgl_pemasukan']);
-$jumlah = abs((int) $_GET['jumlah']);
-$sumber =abs((int) $_GET['id_sumber']);
+$tgl = $_GET['tgl_pemasukan'];
+$jumlah = (int) $_GET['jumlah'];
+$keterangan = isset($_GET['keterangan']) ? $_GET['keterangan'] : '';
 
 //query update
-$query = mysqli_query($koneksi,"UPDATE pemasukan SET tgl_pemasukan='$tgl' , jumlah='$jumlah', id_sumber='$sumber' WHERE id_pemasukan='$id' ");
+$query = mysqli_query($koneksi,"UPDATE pemasukan SET tgl_pemasukan='$tgl' , jumlah='$jumlah', keterangan='$keterangan' WHERE id_pemasukan='$id' ");
 
 $namaadmin = $_SESSION['nama'];
 if ($query) {
 write_log("Nama Admin : ".$namaadmin." => Edit Pemasukan => ".$id." => Sukses Edit");
  # credirect ke page index
- header("location:pendapatan.php"); 
+ header("location:transaksi.php"); 
 }
 else{
 write_log("Nama Admin : ".$namaadmin." => Edit Pemasukan => ".$id." => Gagal Edit");

@@ -50,14 +50,14 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Karyawan
+        Admin
       </div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
+      <!-- Nav Item - Admin -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="karyawan.php">
           <i class="fas fa-fw fa-users"></i>
-          <span>Karyawan</span>
+          <span>Admin</span>
         </a>
       </li>
 	  
@@ -69,16 +69,7 @@
         Tagihan
       </div>
 
-      <!-- Nav Item - Hutang -->
-      <li class="nav-item">
-        <a class="nav-link" href="hutang.php">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Hutang</span></a>
-      </li>
-
-      
-
-      <!-- Nav Item - Tables -->
+      <!-- Nav Item - Laporan -->
       <li class="nav-item">
         <a class="nav-link" href="laporan.php">
           <i class="fas fa-fw fa-table"></i>

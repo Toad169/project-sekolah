@@ -4,14 +4,14 @@ include('koneksi.php');
 
 $tgl_pemasukan = $_GET['tgl_pemasukan'];
 $jumlah = $_GET['jumlah'];
-$sumber = $_GET['sumber'];
+$keterangan = isset($_GET['keterangan']) ? $_GET['keterangan'] : '';
 
 //query update
-$query = mysqli_query($koneksi,"INSERT INTO `pemasukan` (`tgl_pemasukan`, `jumlah`, `id_sumber`) VALUES ('$tgl_pemasukan', '$jumlah', '$sumber')");
+$query = mysqli_query($koneksi,"INSERT INTO `pemasukan` (`tgl_pemasukan`, `jumlah`, `keterangan`) VALUES ('$tgl_pemasukan', '$jumlah', '$keterangan')");
 
 if ($query) {
  # credirect ke page index
- header("location:pendapatan.php"); 
+ header("location:transaksi.php"); 
 }
 else{
  echo "ERROR, data gagal diupdate". mysqli_error($koneksi);

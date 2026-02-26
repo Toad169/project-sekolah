@@ -144,17 +144,17 @@ foreach ($bulanOptions as $b) {
                           <div class="form-group">
                             <label>Minggu yang dibayar</label><br>
 <?php
-$perMinggu = 10000;
-$check1 = $row['minggu_1'] > 0 ? 'checked' : '';
-$check2 = $row['minggu_2'] > 0 ? 'checked' : '';
-$check3 = $row['minggu_3'] > 0 ? 'checked' : '';
-$check4 = $row['minggu_4'] > 0 ? 'checked' : '';
+$perMinggu = 2000;
+$check1 = $row['minggu_1'] >= $perMinggu ? 'checked' : '';
+$check2 = $row['minggu_2'] >= $perMinggu ? 'checked' : '';
+$check3 = $row['minggu_3'] >= $perMinggu ? 'checked' : '';
+$check4 = $row['minggu_4'] >= $perMinggu ? 'checked' : '';
 ?>
                             <label class="mr-2"><input type="checkbox" name="minggu_1" value="1" <?= $check1; ?>> Minggu 1</label>
                             <label class="mr-2"><input type="checkbox" name="minggu_2" value="1" <?= $check2; ?>> Minggu 2</label>
                             <label class="mr-2"><input type="checkbox" name="minggu_3" value="1" <?= $check3; ?>> Minggu 3</label>
                             <label class="mr-2"><input type="checkbox" name="minggu_4" value="1" <?= $check4; ?>> Minggu 4</label>
-                            <small class="form-text text-muted mt-2">Setiap minggu bernilai Rp. 2.000, total kas bulanan Rp. 40.000.</small>
+                            <small class="form-text text-muted mt-2">Setiap minggu bernilai Rp. 2.000, total kas bulanan Rp. 8.000.</small>
                           </div>
 
                           <div class="modal-footer">
@@ -207,7 +207,7 @@ $check4 = $row['minggu_4'] > 0 ? 'checked' : '';
                   <label class="mr-2"><input type="checkbox" name="minggu_2" value="1"> Minggu 2</label>
                   <label class="mr-2"><input type="checkbox" name="minggu_3" value="1"> Minggu 3</label>
                   <label class="mr-2"><input type="checkbox" name="minggu_4" value="1"> Minggu 4</label>
-                  <small class="form-text text-muted mt-2">Setiap minggu bernilai Rp. 2.000, total kas bulanan Rp. 40.000.</small>
+                  <small class="form-text text-muted mt-2">Setiap minggu bernilai Rp. 2.000, total kas bulanan Rp. 8.000.</small>
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-success">Tambah</button>

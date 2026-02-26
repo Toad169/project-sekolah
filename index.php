@@ -21,6 +21,7 @@ require 'cek-sesi.php';
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+  <!-- Tailwind CSS, HTMX, AlpineJS -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
   <script src="//unpkg.com/alpinejs" defer></script>
@@ -36,13 +37,13 @@ require ('sidebar.php');
 $karyawan = mysqli_query($koneksi, "SELECT * FROM karyawan");
 $karyawan = mysqli_num_rows($karyawan);
 
-$res_pengeluaran_hari = mysqli_query($koneksi, "SELECT COALESCE(SUM(jumlah), 0) AS total FROM pengeluaran WHERE tgl_pengeluaran = CURDATE()");
-$row = mysqli_fetch_array($res_pengeluaran_hari);
-$pengeluaran_hari_ini = isset($row['total']) ? (float) $row['total'] : 0;
+$res_pengeluaran_minggu = mysqli_query($koneksi, "SELECT COALESCE(SUM(jumlah), 0) AS total FROM pengeluaran WHERE YEARWEEK(tgl_pengeluaran, 1) = YEARWEEK(CURDATE(), 1)");
+$row = mysqli_fetch_array($res_pengeluaran_minggu);
+$pengeluaran_minggu_ini = isset($row['total']) ? (float) $row['total'] : 0;
 
-$res_pemasukan_hari = mysqli_query($koneksi, "SELECT COALESCE(SUM(jumlah), 0) AS total FROM pemasukan WHERE tgl_pemasukan = CURDATE()");
-$row = mysqli_fetch_array($res_pemasukan_hari);
-$pemasukan_hari_ini = isset($row['total']) ? (float) $row['total'] : 0;
+$res_pemasukan_minggu = mysqli_query($koneksi, "SELECT COALESCE(SUM(jumlah), 0) AS total FROM pemasukan WHERE YEARWEEK(tgl_pemasukan, 1) = YEARWEEK(CURDATE(), 1)");
+$row = mysqli_fetch_array($res_pemasukan_minggu);
+$pemasukan_minggu_ini = isset($row['total']) ? (float) $row['total'] : 0;
 
 
 
@@ -63,23 +64,20 @@ $jumlahkeluar = array_sum($arraykeluar);
 
 $uang = $jumlahmasuk - $jumlahkeluar;
 
-//untuk data chart area
+//untuk data chart area (pendapatan per bulan)
 
-
-
-$chartDays = [];
-$dayQueries = [
-    'tujuhhari' => "SELECT COALESCE(SUM(jumlah), 0) AS total FROM pemasukan WHERE tgl_pemasukan = CURDATE() - INTERVAL 7 DAY",
-    'enamhari'  => "SELECT COALESCE(SUM(jumlah), 0) AS total FROM pemasukan WHERE tgl_pemasukan = CURDATE() - INTERVAL 6 DAY",
-    'limahari'  => "SELECT COALESCE(SUM(jumlah), 0) AS total FROM pemasukan WHERE tgl_pemasukan = CURDATE() - INTERVAL 5 DAY",
-    'empathari' => "SELECT COALESCE(SUM(jumlah), 0) AS total FROM pemasukan WHERE tgl_pemasukan = CURDATE() - INTERVAL 4 DAY",
-    'tigahari'  => "SELECT COALESCE(SUM(jumlah), 0) AS total FROM pemasukan WHERE tgl_pemasukan = CURDATE() - INTERVAL 3 DAY",
-    'duahari'   => "SELECT COALESCE(SUM(jumlah), 0) AS total FROM pemasukan WHERE tgl_pemasukan = CURDATE() - INTERVAL 2 DAY",
-    'satuhari'  => "SELECT COALESCE(SUM(jumlah), 0) AS total FROM pemasukan WHERE tgl_pemasukan = CURDATE() - INTERVAL 1 DAY",
-];
-foreach ($dayQueries as $key => $sql) {
+$chartMonthLabels = [];
+$chartMonthValues = [];
+for ($i = 6; $i >= 0; $i--) {
+    $sql = "
+        SELECT COALESCE(SUM(jumlah), 0) AS total
+        FROM pemasukan
+        WHERE YEAR(tgl_pemasukan) = YEAR(DATE_SUB(CURDATE(), INTERVAL $i MONTH))
+          AND MONTH(tgl_pemasukan) = MONTH(DATE_SUB(CURDATE(), INTERVAL $i MONTH))
+    ";
     $r = mysqli_fetch_array(mysqli_query($koneksi, $sql));
-    $chartDays[$key] = isset($r['total']) ? (float) $r['total'] : 0;
+    $chartMonthValues[] = isset($r['total']) ? (float) $r['total'] : 0;
+    $chartMonthLabels[] = date('M', strtotime("-$i month"));
 }
 ?>
       <!-- Main Content -->
@@ -119,8 +117,8 @@ foreach ($dayQueries as $key => $sql) {
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Pendapatan (Hari Ini)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.<?= number_format($pemasukan_hari_ini, 2, ',', '.'); ?></div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Pendapatan (Minggu Ini)</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.<?= number_format($pemasukan_minggu_ini, 2, ',', '.'); ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -139,8 +137,8 @@ foreach ($dayQueries as $key => $sql) {
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Pengeluaran (Hari Ini)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.<?= number_format($pengeluaran_hari_ini, 2, ',', '.'); ?></div>
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Pengeluaran (Minggu Ini)</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.<?= number_format($pengeluaran_minggu_ini, 2, ',', '.'); ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -223,7 +221,7 @@ foreach ($dayQueries as $key => $sql) {
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Pendapatan Minggu Ini</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Pendapatan Bulan Ini</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -358,7 +356,7 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["7 hari lalu","6 hari lalu", "5 hari lalu", "4 hari lalu", "3 hari lalu", "2 hari lalu", "1 hari lalu"],
+    labels: [<?php echo "'" . implode("','", $chartMonthLabels) . "'"; ?>],
     datasets: [{
       label: "Pendapatan",
       lineTension: 0.3,
@@ -372,7 +370,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [<?php echo $chartDays['tujuhhari']; ?>, <?php echo $chartDays['enamhari']; ?>, <?php echo $chartDays['limahari']; ?>, <?php echo $chartDays['empathari']; ?>, <?php echo $chartDays['tigahari']; ?>, <?php echo $chartDays['duahari']; ?>, <?php echo $chartDays['satuhari']; ?>],
+      data: [<?php echo implode(', ', $chartMonthValues); ?>],
     }],
   },
   options: {

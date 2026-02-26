@@ -24,6 +24,11 @@ require 'cek-sesi.php';
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+  <!-- Tailwind CSS, HTMX, AlpineJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+  <script src="//unpkg.com/alpinejs" defer></script>
+
 </head>
 
 <body id="page-top">

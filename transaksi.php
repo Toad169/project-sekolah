@@ -24,6 +24,11 @@ require 'cek-sesi.php';
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+  <!-- Tailwind CSS, HTMX, AlpineJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+  <script src="//unpkg.com/alpinejs" defer></script>
+
 </head>
 
 <body id="page-top">
@@ -242,32 +247,33 @@ echo $catatan2['catatan'];
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>ID Pemasukan</th>
+                          <th>No</th>
                           <th>Tanggal</th>
                           <th>Jumlah</th>
-                          <th>Sumber</th>
+                          <th>Keterangan</th>
                           <th>Edit</th>
                         </tr>
                       </thead>
                       <tfoot>
                         <tr>
-                          <th>ID Pemasukan</th>
+                          <th>No</th>
                           <th>Tanggal</th>
                           <th>Jumlah</th>
-                          <th>Sumber</th>
+                          <th>Keterangan</th>
                           <th>Edit</th>
                         </tr>
                       </tfoot>
                       <tbody>
 <?php
-$query = mysqli_query($koneksi, "SELECT * FROM pemasukan");
+$query = mysqli_query($koneksi, "SELECT * FROM pemasukan ORDER BY tgl_pemasukan DESC, id_pemasukan DESC");
+$no = 1;
 while ($data = mysqli_fetch_assoc($query)) {
 ?>
                         <tr>
-                          <td><?= $data['id_pemasukan'] ?></td>
+                          <td><?= $no++; ?></td>
                           <td><?= $data['tgl_pemasukan'] ?></td>
                           <td>Rp. <?= number_format($data['jumlah'], 2, ',', '.'); ?></td>
-                          <td><?= $data['id_sumber'] ?></td>
+                          <td><?= htmlspecialchars($data['keterangan'], ENT_QUOTES, 'UTF-8'); ?></td>
                           <td>
                             <a href="#" type="button" class="fa fa-edit btn btn-primary btn-md" data-toggle="modal" data-target="#modalPemasukan<?= $data['id_pemasukan']; ?>"></a>
                           </td>
@@ -306,15 +312,8 @@ while ($data = mysqli_fetch_assoc($query)) {
                                   </div>
 
                                   <div class="form-group">
-                                    <label>Sumber</label>
-                                    <select class="form-control" name="id_sumber">
-<?php
-    $queri = mysqli_query($koneksi, "SELECT * FROM sumber");
-    while ($querynama = mysqli_fetch_array($queri)) {
-      echo '<option value="' . $querynama['id_sumber'] . '">' . $querynama['id_sumber'] . '. ' . $querynama["nama"] . '</option>';
-    }
-?>
-                                    </select>
+                                    <label>Keterangan</label>
+                                    <input type="text" name="keterangan" class="form-control" value="<?php echo htmlspecialchars($row['keterangan'], ENT_QUOTES, 'UTF-8'); ?>">
                                   </div>
 
                                   <div class="modal-footer">
@@ -356,14 +355,8 @@ while ($data = mysqli_fetch_assoc($query)) {
                     <input type="date" class="form-control" name="tgl_pemasukan">
                     Jumlah :
                     <input type="number" class="form-control" name="jumlah">
-                    Sumber :
-                    <select class="form-control" name="sumber">
-                      <option value="1">1. Buat Web Pemerintah</option>
-                      <option value="2">2. Desain Poster Lomba</option>
-                      <option value="3">3. Instalasi Software</option>
-                      <option value="4">4. Instalasi OS</option>
-                      <option value="5">5. Buat Video Animasi</option>
-                    </select>
+                    Keterangan :
+                    <input type="text" class="form-control" name="keterangan">
                   </div>
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Tambah</button>
@@ -520,7 +513,7 @@ echo $catatan['catatan'];
           </div>
 
           <!-- Area Chart Pengeluaran -->
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-xl-8 col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -533,7 +526,7 @@ echo $catatan['catatan'];
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <!-- Tabel Pengeluaran -->
           <button type="button" class="btn btn-success" style="margin:5px" data-toggle="modal" data-target="#myModalTambahPengeluaran">
@@ -551,32 +544,33 @@ echo $catatan['catatan'];
                     <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>ID Pengeluaran</th>
+                          <th>No</th>
                           <th>Tanggal</th>
                           <th>Jumlah</th>
-                          <th>Sumber</th>
+                          <th>Keterangan</th>
                           <th>Edit</th>
                         </tr>
                       </thead>
                       <tfoot>
                         <tr>
-                          <th>ID Pengeluaran</th>
+                          <th>No</th>
                           <th>Tanggal</th>
                           <th>Jumlah</th>
-                          <th>Sumber</th>
+                          <th>Keterangan</th>
                           <th>Edit</th>
                         </tr>
                       </tfoot>
                       <tbody>
 <?php
-$query = mysqli_query($koneksi, "SELECT * FROM pengeluaran");
+$query = mysqli_query($koneksi, "SELECT * FROM pengeluaran ORDER BY tgl_pengeluaran DESC, id_pengeluaran DESC");
+$no = 1;
 while ($data = mysqli_fetch_assoc($query)) {
 ?>
                         <tr>
-                          <td><?= $data['id_pengeluaran'] ?></td>
+                          <td><?= $no++; ?></td>
                           <td><?= $data['tgl_pengeluaran'] ?></td>
                           <td>Rp. <?= number_format($data['jumlah'], 2, ',', '.'); ?></td>
-                          <td><?= $data['id_sumber'] ?></td>
+                          <td><?= htmlspecialchars($data['keterangan'], ENT_QUOTES, 'UTF-8'); ?></td>
                           <td>
                             <a href="#" type="button" class="fa fa-edit btn btn-primary btn-md" data-toggle="modal" data-target="#modalPengeluaran<?= $data['id_pengeluaran']; ?>"></a>
                           </td>
@@ -615,15 +609,8 @@ while ($data = mysqli_fetch_assoc($query)) {
                                   </div>
 
                                   <div class="form-group">
-                                    <label>Sumber</label>
-                                    <select class="form-control" name="id_sumber">
-<?php
-    $queri = mysqli_query($koneksi, "SELECT * FROM sumber");
-    while ($querynama = mysqli_fetch_array($queri)) {
-      echo '<option value="' . $querynama['id_sumber'] . '">' . $querynama['id_sumber'] . '. ' . $querynama["nama"] . '</option>';
-    }
-?>
-                                    </select>
+                                    <label>Keterangan</label>
+                                    <input type="text" name="keterangan" class="form-control" value="<?php echo htmlspecialchars($row['keterangan'], ENT_QUOTES, 'UTF-8'); ?>">
                                   </div>
 
                                   <div class="modal-footer">
@@ -664,14 +651,8 @@ while ($data = mysqli_fetch_assoc($query)) {
                     <input type="date" class="form-control" name="tgl_pengeluaran">
                     Jumlah :
                     <input type="number" class="form-control" name="jumlah">
-                    Sumber :
-                    <select class="form-control" name="sumber">
-                      <option value="6">6. Domain</option>
-                      <option value="7">7. Hosting</option>
-                      <option value="8">8. Listrik</option>
-                      <option value="9">9. Air</option>
-                      <option value="10">10. Wifi</option>
-                    </select>
+                    Keterangan :
+                    <input type="text" class="form-control" name="keterangan">
                   </div>
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Tambah</button>

@@ -9,7 +9,7 @@ $query = mysqli_query($koneksi,"DELETE FROM `pengeluaran` WHERE id_pengeluaran =
 
 if ($query) {
  # credirect ke page index
- header("location:pengeluaran.php"); 
+ header("location:transaksi.php"); 
 }
 else{
  echo "ERROR, data gagal diupdate". mysqli_error($koneksi);

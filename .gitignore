@@ -4,3 +4,6 @@
 .cursor\rules\codacy.mdc
 vendor
 node_modules
+
+#Ignore vscode AI rules
+.github\instructions\codacy.instructions.md

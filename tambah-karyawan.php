@@ -4,9 +4,9 @@ include('koneksi.php');
 
 $nama = $_GET['nama'];
 $posisi = $_GET['posisi'];
-$alamat = $_GET['alamat'];
 $umur = $_GET['umur'];
 $kontak = $_GET['kontak'];
+$alamat = '';
 
 //query update
 $query = mysqli_query($koneksi,"INSERT INTO `karyawan` (`id_karyawan`, `nama`, `posisi`, `alamat`, `umur`, `kontak`) VALUES (null, '$nama', '$posisi', '$alamat', '$umur', '$kontak')");

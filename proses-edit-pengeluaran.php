@@ -5,14 +5,14 @@ include('koneksi.php');
 $id = $_GET['id_pengeluaran'];
 $tgl = $_GET['tgl_pengeluaran'];
 $jumlah = $_GET['jumlah'];
-$sumber = $_GET['id_sumber'];
+$keterangan = isset($_GET['keterangan']) ? $_GET['keterangan'] : '';
 
 //query update
-$query = mysqli_query($koneksi,"UPDATE pengeluaran SET tgl_pengeluaran='$tgl' , jumlah='$jumlah', id_sumber='$sumber' WHERE id_pengeluaran='$id' ");
+$query = mysqli_query($koneksi,"UPDATE pengeluaran SET tgl_pengeluaran='$tgl' , jumlah='$jumlah', keterangan='$keterangan' WHERE id_pengeluaran='$id' ");
 
 if ($query) {
  # credirect ke page index
- header("location:pengeluaran.php"); 
+ header("location:transaksi.php"); 
 }
 else{
  echo "ERROR, data gagal diupdate". mysqli_error($koneksi);
