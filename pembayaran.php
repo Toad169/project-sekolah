@@ -32,7 +32,17 @@ require 'cek-sesi.php';
 require 'koneksi.php';
 require 'sidebar.php';
 
-$queryKas = mysqli_query($koneksi, "SELECT * FROM pembayaran_kas ORDER BY bulan, nama");
+// Opsi bulan (tahun ajaran Juli-Juni)
+$bulanOptions = ['Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'];
+$selectedBulan = isset($_GET['bulan']) ? $_GET['bulan'] : 'Juli';
+
+// Opsi tahun untuk filter tampilan (saat ini belum disimpan di tabel)
+$currentYear = (int) date('Y');
+$selectedTahun = isset($_GET['tahun']) ? (int) $_GET['tahun'] : $currentYear;
+
+// Filter data berdasarkan bulan yang dipilih
+$safeBulan = mysqli_real_escape_string($koneksi, $selectedBulan);
+$queryKas = mysqli_query($koneksi, "SELECT * FROM pembayaran_kas WHERE bulan = '$safeBulan' ORDER BY nama");
 ?>
 
   <!-- Main Content -->
@@ -54,8 +64,32 @@ $queryKas = mysqli_query($koneksi, "SELECT * FROM pembayaran_kas ORDER BY bulan,
 
       <!-- DataTales Example -->
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">Daftar Pembayaran Kas</h6>
+          <form class="form-inline" method="get">
+            <div class="form-group mr-2">
+              <label for="filter-bulan" class="mr-2 mb-0">Bulan</label>
+              <select id="filter-bulan" name="bulan" class="form-control form-control-sm" onchange="this.form.submit()">
+<?php
+foreach ($bulanOptions as $b) {
+  $selected = ($selectedBulan === $b) ? 'selected' : '';
+  echo '<option value="' . $b . '" ' . $selected . '>' . $b . '</option>';
+}
+?>
+              </select>
+            </div>
+            <!-- <div class="form-group">
+              <label for="filter-tahun" class="mr-2 mb-0">Tahun</label>
+              <select id="filter-tahun" name="tahun" class="form-control form-control-sm" onchange="this.form.submit()">
+<?php
+for ($y = $currentYear - 1; $y <= $currentYear + 1; $y++) {
+  $selected = ($selectedTahun === $y) ? 'selected' : '';
+  echo '<option value="' . $y . '" ' . $selected . '>' . $y . '/' . ($y + 1) . '</option>';
+}
+?>
+              </select>
+            </div> -->
+          </form>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -65,10 +99,10 @@ $queryKas = mysqli_query($koneksi, "SELECT * FROM pembayaran_kas ORDER BY bulan,
                   <th>No</th>
                   <th>Nama</th>
                   <th>Bulan</th>
-                  <th>Minggu 1</th>
-                  <th>Minggu 2</th>
-                  <th>Minggu 3</th>
-                  <th>Minggu 4</th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
                   <th>Dibayar</th>
                   <th>Total</th>
                   <th>Kekurangan</th>
@@ -80,10 +114,10 @@ $queryKas = mysqli_query($koneksi, "SELECT * FROM pembayaran_kas ORDER BY bulan,
                   <th>No</th>
                   <th>Nama</th>
                   <th>Bulan</th>
-                  <th>Minggu 1</th>
-                  <th>Minggu 2</th>
-                  <th>Minggu 3</th>
-                  <th>Minggu 4</th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
                   <th>Dibayar</th>
                   <th>Total</th>
                   <th>Kekurangan</th>
@@ -132,7 +166,6 @@ while ($row = mysqli_fetch_assoc($queryKas)) {
                             <label>Bulan</label>
                             <select class="form-control" name="bulan">
 <?php
-$bulanOptions = ['Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 foreach ($bulanOptions as $b) {
   $selected = ($row['bulan'] === $b) ? 'selected' : '';
   echo '<option value="' . $b . '" ' . $selected . '>' . $b . '</option>';
@@ -199,6 +232,12 @@ $check4 = $row['minggu_4'] >= $perMinggu ? 'checked' : '';
                     <option value="Oktober">Oktober</option>
                     <option value="November">November</option>
                     <option value="Desember">Desember</option>
+                    <option value="Januari">Januari</option>
+                    <option value="Februari">Februari</option>
+                    <option value="Maret">Maret</option>
+                    <option value="April">April</option>
+                    <option value="Mei">Mei</option>
+                    <option value="Juni">Juni</option>
                   </select>
                 </div>
                 <div class="form-group">
