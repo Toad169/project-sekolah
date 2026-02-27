@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2026 at 02:19 AM
+-- Generation Time: Feb 27, 2026 at 03:14 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -126,13 +126,6 @@ CREATE TABLE `pemasukan` (
   `id_sumber` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `pemasukan`
---
-
-INSERT INTO `pemasukan` (`id_pemasukan`, `tgl_pemasukan`, `jumlah`, `keterangan`, `id_sumber`) VALUES
-(24, '2026-02-27', 12000, 'nggaktau', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -148,18 +141,9 @@ CREATE TABLE `pembayaran_kas` (
   `minggu_4` int(11) DEFAULT 0,
   `bulan` varchar(20) NOT NULL,
   `dibayar` int(11) DEFAULT 0,
-  `total` int(11) DEFAULT 0,
-  `kekurangan` int(11) DEFAULT 0
+  `kekurangan` int(11) DEFAULT 0,
+  `total` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `pembayaran_kas`
---
-
-INSERT INTO `pembayaran_kas` (`id_kas`, `nama`, `minggu_1`, `minggu_2`, `minggu_3`, `minggu_4`, `bulan`, `dibayar`, `total`, `kekurangan`) VALUES
-(3, 'asdasd', 2000, 0, 0, 0, 'Agustus', 2000, 8000, 6000),
-(4, 'tes', 2000, 2000, 0, 0, 'Januari', 4000, 8000, 4000),
-(5, 'ambatukam termuwani', 2000, 2000, 2000, 2000, 'Januari', 8000, 8000, 0);
 
 -- --------------------------------------------------------
 
@@ -174,13 +158,6 @@ CREATE TABLE `pengeluaran` (
   `keterangan` varchar(100) NOT NULL,
   `id_sumber` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `pengeluaran`
---
-
-INSERT INTO `pengeluaran` (`id_pengeluaran`, `tgl_pengeluaran`, `jumlah`, `keterangan`, `id_sumber`) VALUES
-(20, '2026-02-27', 1000, 'mboh', NULL);
 
 -- --------------------------------------------------------
 
@@ -329,7 +306,7 @@ ALTER TABLE `pemasukan`
 -- AUTO_INCREMENT for table `pembayaran_kas`
 --
 ALTER TABLE `pembayaran_kas`
-  MODIFY `id_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran`
