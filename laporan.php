@@ -63,15 +63,17 @@ require 'sidebar.php'; ?>
                   </tfoot>
                   <tbody>
 				  <?php 
-$pemasukan=mysqli_query($koneksi,"SELECT * FROM pemasukan");
-while ($masuk=mysqli_fetch_array($pemasukan)){
-$arraymasuk[] = $masuk['jumlah'];
+$arraymasuk = [];
+$pemasukan = mysqli_query($koneksi, "SELECT * FROM pemasukan");
+while ($masuk = mysqli_fetch_array($pemasukan)) {
+  $arraymasuk[] = $masuk['jumlah'];
 }
 $jumlahmasuk = array_sum($arraymasuk);
 
-$pengeluaran=mysqli_query($koneksi,"SELECT * FROM pengeluaran");
-while ($keluar=mysqli_fetch_array($pengeluaran)){
-$arraykeluar[] = $keluar['jumlah'];
+$arraykeluar = [];
+$pengeluaran = mysqli_query($koneksi, "SELECT * FROM pengeluaran");
+while ($keluar = mysqli_fetch_array($pengeluaran)) {
+  $arraykeluar[] = $keluar['jumlah'];
 }
 $jumlahkeluar = array_sum($arraykeluar);
 

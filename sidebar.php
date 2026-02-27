@@ -50,14 +50,14 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Admin
+        Anggota
       </div>
 
-      <!-- Nav Item - Admin -->
+      <!-- Nav Item - Anggota -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="karyawan.php">
           <i class="fas fa-fw fa-users"></i>
-          <span>Admin</span>
+          <span>Anggota</span>
         </a>
       </li>
 	  

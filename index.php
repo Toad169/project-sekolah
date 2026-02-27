@@ -61,8 +61,12 @@ while ($keluar = mysqli_fetch_array($pengeluaran)) {
 }
 $jumlahkeluar = array_sum($arraykeluar);
 
+// Total pembayaran kas (dibayar) masuk ke sisa uang
+$res_kas = mysqli_query($koneksi, "SELECT COALESCE(SUM(dibayar), 0) AS total_dibayar FROM pembayaran_kas");
+$row_kas = mysqli_fetch_array($res_kas);
+$total_dibayar_kas = isset($row_kas['total_dibayar']) ? (float) $row_kas['total_dibayar'] : 0;
 
-$uang = $jumlahmasuk - $jumlahkeluar;
+$uang = ($jumlahmasuk + $total_dibayar_kas) - $jumlahkeluar;
 
 //untuk data chart area (pendapatan per bulan)
 
