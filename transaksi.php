@@ -35,31 +35,32 @@ require 'cek-sesi.php';
 
 <?php
 require 'koneksi.php';
+
 require 'sidebar.php';
 
 // Data pengeluaran 7 hari terakhir untuk chart
-$sekarang = mysqli_query($koneksi, "SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE()");
+$sekarang = mysqli_query($koneksi, 'SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE()');
 $sekarang = mysqli_fetch_array($sekarang);
 
-$satuhari = mysqli_query($koneksi, "SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE() - INTERVAL 1 DAY");
+$satuhari = mysqli_query($koneksi, 'SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE() - INTERVAL 1 DAY');
 $satuhari = mysqli_fetch_array($satuhari);
 
-$duahari = mysqli_query($koneksi, "SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE() - INTERVAL 2 DAY");
+$duahari = mysqli_query($koneksi, 'SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE() - INTERVAL 2 DAY');
 $duahari = mysqli_fetch_array($duahari);
 
-$tigahari = mysqli_query($koneksi, "SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE() - INTERVAL 3 DAY");
+$tigahari = mysqli_query($koneksi, 'SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE() - INTERVAL 3 DAY');
 $tigahari = mysqli_fetch_array($tigahari);
 
-$empathari = mysqli_query($koneksi, "SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE() - INTERVAL 4 DAY");
+$empathari = mysqli_query($koneksi, 'SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE() - INTERVAL 4 DAY');
 $empathari = mysqli_fetch_array($empathari);
 
-$limahari = mysqli_query($koneksi, "SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE() - INTERVAL 5 DAY");
+$limahari = mysqli_query($koneksi, 'SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE() - INTERVAL 5 DAY');
 $limahari = mysqli_fetch_array($limahari);
 
-$enamhari = mysqli_query($koneksi, "SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE() - INTERVAL 6 DAY");
+$enamhari = mysqli_query($koneksi, 'SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE() - INTERVAL 6 DAY');
 $enamhari = mysqli_fetch_array($enamhari);
 
-$tujuhhari = mysqli_query($koneksi, "SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE() - INTERVAL 7 DAY");
+$tujuhhari = mysqli_query($koneksi, 'SELECT jumlah FROM pengeluaran WHERE tgl_pengeluaran = CURDATE() - INTERVAL 7 DAY');
 $tujuhhari = mysqli_fetch_array($tujuhhari);
 ?>
 
@@ -104,53 +105,53 @@ $tujuhhari = mysqli_fetch_array($tujuhhari);
                 </div>
                 <div class="card-body">
 <?php
-$namasumber1 = mysqli_query($koneksi, "SELECT * FROM `sumber` WHERE id_sumber = 1");
+$namasumber1 = mysqli_query($koneksi, 'SELECT * FROM `sumber` WHERE id_sumber = 1');
 $sumbern1 = mysqli_fetch_assoc($namasumber1);
 
-$namasumber2 = mysqli_query($koneksi, "SELECT * FROM `sumber` WHERE id_sumber = 2");
+$namasumber2 = mysqli_query($koneksi, 'SELECT * FROM `sumber` WHERE id_sumber = 2');
 $sumbern2 = mysqli_fetch_assoc($namasumber2);
 
-$namasumber3 = mysqli_query($koneksi, "SELECT * FROM `sumber` WHERE id_sumber = 3");
+$namasumber3 = mysqli_query($koneksi, 'SELECT * FROM `sumber` WHERE id_sumber = 3');
 $sumbern3 = mysqli_fetch_assoc($namasumber3);
 
-$namasumber4 = mysqli_query($koneksi, "SELECT * FROM `sumber` WHERE id_sumber = 4");
+$namasumber4 = mysqli_query($koneksi, 'SELECT * FROM `sumber` WHERE id_sumber = 4');
 $sumbern4 = mysqli_fetch_assoc($namasumber4);
 
-$namasumber5 = mysqli_query($koneksi, "SELECT * FROM `sumber` WHERE id_sumber = 5");
+$namasumber5 = mysqli_query($koneksi, 'SELECT * FROM `sumber` WHERE id_sumber = 5');
 $sumbern5 = mysqli_fetch_assoc($namasumber5);
 
 $arrayhasil1 = [];
-$hasil1 = mysqli_query($koneksi, "SELECT * FROM pemasukan WHERE id_sumber = 1");
+$hasil1 = mysqli_query($koneksi, 'SELECT * FROM pemasukan WHERE id_sumber = 1');
 while ($jumlah1 = mysqli_fetch_array($hasil1)) {
-  $arrayhasil1[] = $jumlah1['jumlah'];
+    $arrayhasil1[] = $jumlah1['jumlah'];
 }
 $jumlahhasil1 = array_sum($arrayhasil1);
 
 $arrayhasil2 = [];
-$hasil2 = mysqli_query($koneksi, "SELECT * FROM pemasukan WHERE id_sumber = 2");
+$hasil2 = mysqli_query($koneksi, 'SELECT * FROM pemasukan WHERE id_sumber = 2');
 while ($jumlah2 = mysqli_fetch_array($hasil2)) {
-  $arrayhasil2[] = $jumlah2['jumlah'];
+    $arrayhasil2[] = $jumlah2['jumlah'];
 }
 $jumlahhasil2 = array_sum($arrayhasil2);
 
 $arrayhasil3 = [];
-$hasil3 = mysqli_query($koneksi, "SELECT * FROM pemasukan WHERE id_sumber = 3");
+$hasil3 = mysqli_query($koneksi, 'SELECT * FROM pemasukan WHERE id_sumber = 3');
 while ($jumlah3 = mysqli_fetch_array($hasil3)) {
-  $arrayhasil3[] = $jumlah3['jumlah'];
+    $arrayhasil3[] = $jumlah3['jumlah'];
 }
 $jumlahhasil3 = array_sum($arrayhasil3);
 
 $arrayhasil4 = [];
-$hasil4 = mysqli_query($koneksi, "SELECT * FROM pemasukan WHERE id_sumber = 4");
+$hasil4 = mysqli_query($koneksi, 'SELECT * FROM pemasukan WHERE id_sumber = 4');
 while ($jumlah4 = mysqli_fetch_array($hasil4)) {
-  $arrayhasil4[] = $jumlah4['jumlah'];
+    $arrayhasil4[] = $jumlah4['jumlah'];
 }
 $jumlahhasil4 = array_sum($arrayhasil4);
 
 $arrayhasil5 = [];
-$hasil5 = mysqli_query($koneksi, "SELECT * FROM pemasukan WHERE id_sumber = 5");
+$hasil5 = mysqli_query($koneksi, 'SELECT * FROM pemasukan WHERE id_sumber = 5');
 while ($jumlah5 = mysqli_fetch_array($hasil5)) {
-  $arrayhasil5[] = $jumlah5['jumlah'];
+    $arrayhasil5[] = $jumlah5['jumlah'];
 }
 $jumlahhasil5 = array_sum($arrayhasil5);
 
@@ -175,25 +176,25 @@ $sumber5text = mysqli_num_rows($sumber5);
 $sumber5 = $sumber5text * 10;
 
 echo '
-  <h4 class="small font-weight-bold">' . $sumbern1['nama'] . '<span class="float-right">Rp. ' . number_format($jumlahhasil1, 2, ',', '.') . '</span></h4>
+  <h4 class="small font-weight-bold">'.$sumbern1['nama'].'<span class="float-right">Rp. '.number_format($jumlahhasil1, 2, ',', '.').'</span></h4>
   <div class="progress mb-4">
-    <div class="progress-bar bg-danger" role="progressbar" style="width:' . $sumber1 . '%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">' . $sumber1text . ' Kali</div>
+    <div class="progress-bar bg-danger" role="progressbar" style="width:'.$sumber1.'%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">'.$sumber1text.' Kali</div>
   </div>
-  <h4 class="small font-weight-bold">' . $sumbern2['nama'] . '<span class="float-right">Rp. ' . number_format($jumlahhasil2, 2, ',', '.') . '</span></h4>
+  <h4 class="small font-weight-bold">'.$sumbern2['nama'].'<span class="float-right">Rp. '.number_format($jumlahhasil2, 2, ',', '.').'</span></h4>
   <div class="progress mb-4">
-    <div class="progress-bar bg-warning" role="progressbar" style="width:' . $sumber2 . '%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">' . $sumber2text . ' Kali</div>
+    <div class="progress-bar bg-warning" role="progressbar" style="width:'.$sumber2.'%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">'.$sumber2text.' Kali</div>
   </div>
-  <h4 class="small font-weight-bold">' . $sumbern3['nama'] . '<span class="float-right">Rp. ' . number_format($jumlahhasil3, 2, ',', '.') . '</span></h4>
+  <h4 class="small font-weight-bold">'.$sumbern3['nama'].'<span class="float-right">Rp. '.number_format($jumlahhasil3, 2, ',', '.').'</span></h4>
   <div class="progress mb-4">
-    <div class="progress-bar bg-info" role="progressbar" style="width:' . $sumber3 . '%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">' . $sumber3text . ' Kali</div>
+    <div class="progress-bar bg-info" role="progressbar" style="width:'.$sumber3.'%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">'.$sumber3text.' Kali</div>
   </div>
-  <h4 class="small font-weight-bold">' . $sumbern4['nama'] . '<span class="float-right">Rp. ' . number_format($jumlahhasil4, 2, ',', '.') . '</span></h4>
+  <h4 class="small font-weight-bold">'.$sumbern4['nama'].'<span class="float-right">Rp. '.number_format($jumlahhasil4, 2, ',', '.').'</span></h4>
   <div class="progress mb-4">
-    <div class="progress-bar bg-primary" role="progressbar" style="width:' . $sumber4 . '%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">' . $sumber4text . ' Kali</div>
+    <div class="progress-bar bg-primary" role="progressbar" style="width:'.$sumber4.'%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">'.$sumber4text.' Kali</div>
   </div>
-  <h4 class="small font-weight-bold">' . $sumbern5['nama'] . '<span class="float-right">Rp. ' . number_format($jumlahhasil5, 2, ',', '.') . '</span></h4>
+  <h4 class="small font-weight-bold">'.$sumbern5['nama'].'<span class="float-right">Rp. '.number_format($jumlahhasil5, 2, ',', '.').'</span></h4>
   <div class="progress mb-4">
-    <div class="progress-bar bg-success" role="progressbar" style="width:' . $sumber5 . '%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">' . $sumber5text . ' Kali</div>
+    <div class="progress-bar bg-success" role="progressbar" style="width:'.$sumber5.'%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">'.$sumber5text.' Kali</div>
   </div>';
 ?>
                 </div>
@@ -209,7 +210,7 @@ echo '
                 <div class="collapse show" id="collapsePendapatanCatatan1">
                   <div class="card-body">
 <?php
-$catatan1 = mysqli_query($koneksi, "SELECT catatan FROM catatan WHERE id_catatan = 1");
+$catatan1 = mysqli_query($koneksi, 'SELECT catatan FROM catatan WHERE id_catatan = 1');
 $catatan1 = mysqli_fetch_array($catatan1);
 echo $catatan1['catatan'];
 ?>
@@ -223,7 +224,7 @@ echo $catatan1['catatan'];
                 <div class="collapse show" id="collapsePendapatanCatatan2">
                   <div class="card-body">
 <?php
-$catatan2 = mysqli_query($koneksi, "SELECT * FROM catatan WHERE id_catatan = 2");
+$catatan2 = mysqli_query($koneksi, 'SELECT * FROM catatan WHERE id_catatan = 2');
 $catatan2 = mysqli_fetch_array($catatan2);
 echo $catatan2['catatan'];
 ?>
@@ -265,22 +266,22 @@ echo $catatan2['catatan'];
                       </tfoot>
                       <tbody>
 <?php
-$query = mysqli_query($koneksi, "SELECT * FROM pemasukan ORDER BY tgl_pemasukan DESC, id_pemasukan DESC");
+$query = mysqli_query($koneksi, 'SELECT * FROM pemasukan ORDER BY tgl_pemasukan DESC, id_pemasukan DESC');
 $no = 1;
 while ($data = mysqli_fetch_assoc($query)) {
-?>
+    ?>
                         <tr>
-                          <td><?= $no++; ?></td>
-                          <td><?= $data['tgl_pemasukan'] ?></td>
-                          <td>Rp. <?= number_format($data['jumlah'], 2, ',', '.'); ?></td>
-                          <td><?= htmlspecialchars($data['keterangan'], ENT_QUOTES, 'UTF-8'); ?></td>
+                          <td><?php echo $no++; ?></td>
+                          <td><?php echo $data['tgl_pemasukan']; ?></td>
+                          <td>Rp. <?php echo number_format($data['jumlah'], 2, ',', '.'); ?></td>
+                          <td><?php echo htmlspecialchars($data['keterangan'], ENT_QUOTES, 'UTF-8'); ?></td>
                           <td>
-                            <a href="#" type="button" class="fa fa-edit btn btn-primary btn-md" data-toggle="modal" data-target="#modalPemasukan<?= $data['id_pemasukan']; ?>"></a>
+                            <a href="#" type="button" class="fa fa-edit btn btn-primary btn-md" data-toggle="modal" data-target="#modalPemasukan<?php echo $data['id_pemasukan']; ?>"></a>
                           </td>
                         </tr>
 
                         <!-- Modal Edit Pemasukan-->
-                        <div class="modal fade" id="modalPemasukan<?= $data['id_pemasukan']; ?>" role="dialog">
+                        <div class="modal fade" id="modalPemasukan<?php echo $data['id_pemasukan']; ?>" role="dialog">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -290,10 +291,10 @@ while ($data = mysqli_fetch_assoc($query)) {
                               <div class="modal-body">
                                 <form role="form" action="proses-edit-pemasukan.php" method="get">
 <?php
-  $id = $data['id_pemasukan'];
-  $query_edit = mysqli_query($koneksi, "SELECT * FROM pemasukan WHERE id_pemasukan='$id'");
-  while ($row = mysqli_fetch_array($query_edit)) {
-?>
+      $id = $data['id_pemasukan'];
+    $query_edit = mysqli_query($koneksi, "SELECT * FROM pemasukan WHERE id_pemasukan='{$id}'");
+    while ($row = mysqli_fetch_array($query_edit)) {
+        ?>
                                   <input type="hidden" name="id_pemasukan" value="<?php echo $row['id_pemasukan']; ?>">
 
                                   <div class="form-group">
@@ -318,12 +319,12 @@ while ($data = mysqli_fetch_assoc($query)) {
 
                                   <div class="modal-footer">
                                     <button type="submit" class="btn btn-success">Ubah</button>
-                                    <a href="hapus-pemasukan.php?id_pemasukan=<?= $row['id_pemasukan']; ?>" Onclick="confirm('Anda Yakin Ingin Menghapus?')" class="btn btn-danger">Hapus</a>
+                                    <a href="hapus-pemasukan.php?id_pemasukan=<?php echo $row['id_pemasukan']; ?>" Onclick="confirm('Anda Yakin Ingin Menghapus?')" class="btn btn-danger">Hapus</a>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
                                   </div>
 <?php
-  }
-?>
+    }
+    ?>
                                 </form>
                               </div>
                             </div>
@@ -382,53 +383,53 @@ while ($data = mysqli_fetch_assoc($query)) {
                 </div>
                 <div class="card-body">
 <?php
-$namasumber1 = mysqli_query($koneksi, "SELECT * FROM `sumber` WHERE id_sumber = 6");
+$namasumber1 = mysqli_query($koneksi, 'SELECT * FROM `sumber` WHERE id_sumber = 6');
 $sumbern1 = mysqli_fetch_assoc($namasumber1);
 
-$namasumber2 = mysqli_query($koneksi, "SELECT * FROM `sumber` WHERE id_sumber = 7");
+$namasumber2 = mysqli_query($koneksi, 'SELECT * FROM `sumber` WHERE id_sumber = 7');
 $sumbern2 = mysqli_fetch_assoc($namasumber2);
 
-$namasumber3 = mysqli_query($koneksi, "SELECT * FROM `sumber` WHERE id_sumber = 8");
+$namasumber3 = mysqli_query($koneksi, 'SELECT * FROM `sumber` WHERE id_sumber = 8');
 $sumbern3 = mysqli_fetch_assoc($namasumber3);
 
-$namasumber4 = mysqli_query($koneksi, "SELECT * FROM `sumber` WHERE id_sumber = 9");
+$namasumber4 = mysqli_query($koneksi, 'SELECT * FROM `sumber` WHERE id_sumber = 9');
 $sumbern4 = mysqli_fetch_assoc($namasumber4);
 
-$namasumber5 = mysqli_query($koneksi, "SELECT * FROM `sumber` WHERE id_sumber = 10");
+$namasumber5 = mysqli_query($koneksi, 'SELECT * FROM `sumber` WHERE id_sumber = 10');
 $sumbern5 = mysqli_fetch_assoc($namasumber5);
 
 $arrayhasil1 = [];
-$hasil1 = mysqli_query($koneksi, "SELECT * FROM pengeluaran WHERE id_sumber = 6");
+$hasil1 = mysqli_query($koneksi, 'SELECT * FROM pengeluaran WHERE id_sumber = 6');
 while ($jumlah1 = mysqli_fetch_array($hasil1)) {
-  $arrayhasil1[] = $jumlah1['jumlah'];
+    $arrayhasil1[] = $jumlah1['jumlah'];
 }
 $jumlahhasil1 = array_sum($arrayhasil1);
 
 $arrayhasil2 = [];
-$hasil2 = mysqli_query($koneksi, "SELECT * FROM pengeluaran WHERE id_sumber = 7");
+$hasil2 = mysqli_query($koneksi, 'SELECT * FROM pengeluaran WHERE id_sumber = 7');
 while ($jumlah2 = mysqli_fetch_array($hasil2)) {
-  $arrayhasil2[] = $jumlah2['jumlah'];
+    $arrayhasil2[] = $jumlah2['jumlah'];
 }
 $jumlahhasil2 = array_sum($arrayhasil2);
 
 $arrayhasil3 = [];
-$hasil3 = mysqli_query($koneksi, "SELECT * FROM pengeluaran WHERE id_sumber = 8");
+$hasil3 = mysqli_query($koneksi, 'SELECT * FROM pengeluaran WHERE id_sumber = 8');
 while ($jumlah3 = mysqli_fetch_array($hasil3)) {
-  $arrayhasil3[] = $jumlah3['jumlah'];
+    $arrayhasil3[] = $jumlah3['jumlah'];
 }
 $jumlahhasil3 = array_sum($arrayhasil3);
 
 $arrayhasil4 = [];
-$hasil4 = mysqli_query($koneksi, "SELECT * FROM pengeluaran WHERE id_sumber = 9");
+$hasil4 = mysqli_query($koneksi, 'SELECT * FROM pengeluaran WHERE id_sumber = 9');
 while ($jumlah4 = mysqli_fetch_array($hasil4)) {
-  $arrayhasil4[] = $jumlah4['jumlah'];
+    $arrayhasil4[] = $jumlah4['jumlah'];
 }
 $jumlahhasil4 = array_sum($arrayhasil4);
 
 $arrayhasil5 = [];
-$hasil5 = mysqli_query($koneksi, "SELECT * FROM pengeluaran WHERE id_sumber = 10");
+$hasil5 = mysqli_query($koneksi, 'SELECT * FROM pengeluaran WHERE id_sumber = 10');
 while ($jumlah5 = mysqli_fetch_array($hasil5)) {
-  $arrayhasil5[] = $jumlah5['jumlah'];
+    $arrayhasil5[] = $jumlah5['jumlah'];
 }
 $jumlahhasil5 = array_sum($arrayhasil5);
 
@@ -453,25 +454,25 @@ $sumber5text = mysqli_num_rows($sumber5);
 $sumber5 = $sumber5text * 10;
 
 echo '
-  <h4 class="small font-weight-bold">' . $sumbern1['nama'] . '<span class="float-right">Rp. ' . number_format($jumlahhasil1, 2, ',', '.') . '</span></h4>
+  <h4 class="small font-weight-bold">'.$sumbern1['nama'].'<span class="float-right">Rp. '.number_format($jumlahhasil1, 2, ',', '.').'</span></h4>
   <div class="progress mb-4">
-    <div class="progress-bar bg-danger" role="progressbar" style="width:' . $sumber1 . '%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">' . $sumber1text . ' Kali</div>
+    <div class="progress-bar bg-danger" role="progressbar" style="width:'.$sumber1.'%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">'.$sumber1text.' Kali</div>
   </div>
-  <h4 class="small font-weight-bold">' . $sumbern2['nama'] . '<span class="float-right">Rp. ' . number_format($jumlahhasil2, 2, ',', '.') . '</span></h4>
+  <h4 class="small font-weight-bold">'.$sumbern2['nama'].'<span class="float-right">Rp. '.number_format($jumlahhasil2, 2, ',', '.').'</span></h4>
   <div class="progress mb-4">
-    <div class="progress-bar bg-warning" role="progressbar" style="width:' . $sumber2 . '%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">' . $sumber2text . ' Kali</div>
+    <div class="progress-bar bg-warning" role="progressbar" style="width:'.$sumber2.'%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">'.$sumber2text.' Kali</div>
   </div>
-  <h4 class="small font-weight-bold">' . $sumbern3['nama'] . '<span class="float-right">Rp. ' . number_format($jumlahhasil3, 2, ',', '.') . '</span></h4>
+  <h4 class="small font-weight-bold">'.$sumbern3['nama'].'<span class="float-right">Rp. '.number_format($jumlahhasil3, 2, ',', '.').'</span></h4>
   <div class="progress mb-4">
-    <div class="progress-bar bg-info" role="progressbar" style="width:' . $sumber3 . '%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">' . $sumber3text . ' Kali</div>
+    <div class="progress-bar bg-info" role="progressbar" style="width:'.$sumber3.'%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">'.$sumber3text.' Kali</div>
   </div>
-  <h4 class="small font-weight-bold">' . $sumbern4['nama'] . '<span class="float-right">Rp. ' . number_format($jumlahhasil4, 2, ',', '.') . '</span></h4>
+  <h4 class="small font-weight-bold">'.$sumbern4['nama'].'<span class="float-right">Rp. '.number_format($jumlahhasil4, 2, ',', '.').'</span></h4>
   <div class="progress mb-4">
-    <div class="progress-bar bg-primary" role="progressbar" style="width:' . $sumber4 . '%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">' . $sumber4text . ' Kali</div>
+    <div class="progress-bar bg-primary" role="progressbar" style="width:'.$sumber4.'%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">'.$sumber4text.' Kali</div>
   </div>
-  <h4 class="small font-weight-bold">' . $sumbern5['nama'] . '<span class="float-right">Rp. ' . number_format($jumlahhasil5, 2, ',', '.') . '</span></h4>
+  <h4 class="small font-weight-bold">'.$sumbern5['nama'].'<span class="float-right">Rp. '.number_format($jumlahhasil5, 2, ',', '.').'</span></h4>
   <div class="progress mb-4">
-    <div class="progress-bar bg-success" role="progressbar" style="width:' . $sumber5 . '%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">' . $sumber5text . ' Kali</div>
+    <div class="progress-bar bg-success" role="progressbar" style="width:'.$sumber5.'%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">'.$sumber5text.' Kali</div>
   </div>';
 ?>
                 </div>
@@ -487,7 +488,7 @@ echo '
                 <div class="collapse show" id="collapsePengeluaranCatatan1">
                   <div class="card-body">
 <?php
-$catatan = mysqli_query($koneksi, "SELECT catatan FROM catatan WHERE id_catatan = 3");
+$catatan = mysqli_query($koneksi, 'SELECT catatan FROM catatan WHERE id_catatan = 3');
 $catatan = mysqli_fetch_array($catatan);
 echo $catatan['catatan'];
 ?>
@@ -501,7 +502,7 @@ echo $catatan['catatan'];
                 <div class="collapse show" id="collapsePengeluaranCatatan2">
                   <div class="card-body">
 <?php
-$catatan = mysqli_query($koneksi, "SELECT catatan FROM catatan WHERE id_catatan = 4");
+$catatan = mysqli_query($koneksi, 'SELECT catatan FROM catatan WHERE id_catatan = 4');
 $catatan = mysqli_fetch_array($catatan);
 echo $catatan['catatan'];
 ?>
@@ -562,22 +563,22 @@ echo $catatan['catatan'];
                       </tfoot>
                       <tbody>
 <?php
-$query = mysqli_query($koneksi, "SELECT * FROM pengeluaran ORDER BY tgl_pengeluaran DESC, id_pengeluaran DESC");
+$query = mysqli_query($koneksi, 'SELECT * FROM pengeluaran ORDER BY tgl_pengeluaran DESC, id_pengeluaran DESC');
 $no = 1;
 while ($data = mysqli_fetch_assoc($query)) {
-?>
+    ?>
                         <tr>
-                          <td><?= $no++; ?></td>
-                          <td><?= $data['tgl_pengeluaran'] ?></td>
-                          <td>Rp. <?= number_format($data['jumlah'], 2, ',', '.'); ?></td>
-                          <td><?= htmlspecialchars($data['keterangan'], ENT_QUOTES, 'UTF-8'); ?></td>
+                          <td><?php echo $no++; ?></td>
+                          <td><?php echo $data['tgl_pengeluaran']; ?></td>
+                          <td>Rp. <?php echo number_format($data['jumlah'], 2, ',', '.'); ?></td>
+                          <td><?php echo htmlspecialchars($data['keterangan'], ENT_QUOTES, 'UTF-8'); ?></td>
                           <td>
-                            <a href="#" type="button" class="fa fa-edit btn btn-primary btn-md" data-toggle="modal" data-target="#modalPengeluaran<?= $data['id_pengeluaran']; ?>"></a>
+                            <a href="#" type="button" class="fa fa-edit btn btn-primary btn-md" data-toggle="modal" data-target="#modalPengeluaran<?php echo $data['id_pengeluaran']; ?>"></a>
                           </td>
                         </tr>
 
                         <!-- Modal Edit Pengeluaran-->
-                        <div class="modal fade" id="modalPengeluaran<?= $data['id_pengeluaran']; ?>" role="dialog">
+                        <div class="modal fade" id="modalPengeluaran<?php echo $data['id_pengeluaran']; ?>" role="dialog">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -587,10 +588,10 @@ while ($data = mysqli_fetch_assoc($query)) {
                               <div class="modal-body">
                                 <form role="form" action="proses-edit-pengeluaran.php" method="get">
 <?php
-  $id = $data['id_pengeluaran'];
-  $query_edit = mysqli_query($koneksi, "SELECT * FROM pengeluaran WHERE id_pengeluaran='$id'");
-  while ($row = mysqli_fetch_array($query_edit)) {
-?>
+      $id = $data['id_pengeluaran'];
+    $query_edit = mysqli_query($koneksi, "SELECT * FROM pengeluaran WHERE id_pengeluaran='{$id}'");
+    while ($row = mysqli_fetch_array($query_edit)) {
+        ?>
                                   <input type="hidden" name="id_pengeluaran" value="<?php echo $row['id_pengeluaran']; ?>">
 
                                   <div class="form-group">
@@ -615,12 +616,12 @@ while ($data = mysqli_fetch_assoc($query)) {
 
                                   <div class="modal-footer">
                                     <button type="submit" class="btn btn-success">Ubah</button>
-                                    <a href="hapus-pengeluaran.php?id_pengeluaran=<?= $row['id_pengeluaran']; ?>" Onclick="confirm('Anda Yakin Ingin Menghapus?')" class="btn btn-danger">Hapus</a>
+                                    <a href="hapus-pengeluaran.php?id_pengeluaran=<?php echo $row['id_pengeluaran']; ?>" Onclick="confirm('Anda Yakin Ingin Menghapus?')" class="btn btn-danger">Hapus</a>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
                                   </div>
 <?php
-  }
-?>
+    }
+    ?>
                                 </form>
                               </div>
                             </div>
@@ -673,7 +674,7 @@ while ($data = mysqli_fetch_assoc($query)) {
   </div>
   <!-- End of Main Content -->
 
-<?php require 'footer.php'?>
+<?php require 'footer.php'; ?>
 
     </div>
     <!-- End of Content Wrapper -->
@@ -753,7 +754,7 @@ while ($data = mysqli_fetch_assoc($query)) {
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
           pointHitRadius: 10,
           pointBorderWidth: 2,
-          data: [<?php echo $tujuhhari['0']?>, <?php echo $enamhari['0'] ?>, <?php echo $limahari['0'] ?>, <?php echo $empathari['0'] ?>, <?php echo $tigahari['0'] ?>, <?php echo $duahari['0'] ?>, <?php echo $satuhari['0'] ?>],
+          data: [<?php echo $tujuhhari['0']; ?>, <?php echo $enamhari['0']; ?>, <?php echo $limahari['0']; ?>, <?php echo $empathari['0']; ?>, <?php echo $tigahari['0']; ?>, <?php echo $duahari['0']; ?>, <?php echo $satuhari['0']; ?>],
         }],
       },
       options: {

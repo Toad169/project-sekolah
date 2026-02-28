@@ -24,6 +24,11 @@ require 'cek-sesi.php';
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+  <!-- Tailwind CSS, HTMX, AlpineJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+  <script src="//unpkg.com/alpinejs" defer></script>
+
   <style media="print">
     body * { visibility: hidden; }
     #card-pembayaran-kas, #card-pembayaran-kas * { visibility: visible; }
@@ -40,6 +45,7 @@ require 'cek-sesi.php';
 
 <?php
 require 'koneksi.php';
+
 require 'sidebar.php';
 
 // Opsi bulan (tahun ajaran Juli-Juni)
@@ -52,7 +58,7 @@ $selectedTahun = isset($_GET['tahun']) ? (int) $_GET['tahun'] : $currentYear;
 
 // Filter data berdasarkan bulan yang dipilih
 $safeBulan = mysqli_real_escape_string($koneksi, $selectedBulan);
-$queryKas = mysqli_query($koneksi, "SELECT * FROM pembayaran_kas WHERE bulan = '$safeBulan' ORDER BY nama");
+$queryKas = mysqli_query($koneksi, "SELECT * FROM pembayaran_kas WHERE bulan = '{$safeBulan}' ORDER BY nama");
 ?>
 
   <!-- Main Content -->
@@ -77,7 +83,7 @@ $queryKas = mysqli_query($koneksi, "SELECT * FROM pembayaran_kas WHERE bulan = '
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">Daftar Pembayaran Kas</h6>
           <div class="d-flex align-items-center flex-wrap">
-            <a href="export-pembayaran.php?bulan=<?= urlencode($selectedBulan); ?>" class="btn btn-success btn-sm mr-2" title="Simpan sebagai Excel">
+            <a href="export-pembayaran.php?bulan=<?php echo urlencode($selectedBulan); ?>" class="btn btn-success btn-sm mr-2" title="Simpan sebagai Excel">
               <i class="fas fa-file-excel"></i> Export as Excel
             </a>
             <!-- <button type="button" class="btn btn-info btn-sm mr-2" onclick="cetakPembayaran()" title="Cetak">
@@ -89,8 +95,8 @@ $queryKas = mysqli_query($koneksi, "SELECT * FROM pembayaran_kas WHERE bulan = '
                 <select id="filter-bulan" name="bulan" class="form-control form-control-sm" onchange="this.form.submit()">
 <?php
 foreach ($bulanOptions as $b) {
-  $selected = ($selectedBulan === $b) ? 'selected' : '';
-  echo '<option value="' . $b . '" ' . $selected . '>' . $b . '</option>';
+    $selected = ($selectedBulan === $b) ? 'selected' : '';
+    echo '<option value="'.$b.'" '.$selected.'>'.$b.'</option>';
 }
 ?>
                 </select>
@@ -101,9 +107,9 @@ foreach ($bulanOptions as $b) {
               <label for="filter-tahun" class="mr-2 mb-0">Tahun</label>
               <select id="filter-tahun" name="tahun" class="form-control form-control-sm" onchange="this.form.submit()">
 <?php
-for ($y = $currentYear - 1; $y <= $currentYear + 1; $y++) {
-  $selected = ($selectedTahun === $y) ? 'selected' : '';
-  echo '<option value="' . $y . '" ' . $selected . '>' . $y . '/' . ($y + 1) . '</option>';
+for ($y = $currentYear - 1; $y <= $currentYear + 1; ++$y) {
+    $selected = ($selectedTahun === $y) ? 'selected' : '';
+    echo '<option value="'.$y.'" '.$selected.'>'.$y.'/'.($y + 1).'</option>';
 }
 ?>
               </select>
@@ -146,25 +152,25 @@ for ($y = $currentYear - 1; $y <= $currentYear + 1; $y++) {
 <?php
 $no = 1;
 while ($row = mysqli_fetch_assoc($queryKas)) {
-?>
+    ?>
                 <tr>
-                  <td><?= $no++; ?></td>
-                  <td><?= htmlspecialchars($row['nama'], ENT_QUOTES, 'UTF-8'); ?></td>
-                  <td><?= htmlspecialchars($row['bulan'], ENT_QUOTES, 'UTF-8'); ?></td>
-                  <td><?= number_format($row['minggu_1'], 0, ',', '.'); ?></td>
-                  <td><?= number_format($row['minggu_2'], 0, ',', '.'); ?></td>
-                  <td><?= number_format($row['minggu_3'], 0, ',', '.'); ?></td>
-                  <td><?= number_format($row['minggu_4'], 0, ',', '.'); ?></td>
-                  <td><?= number_format($row['dibayar'], 0, ',', '.'); ?></td>
-                  <td><?= number_format($row['kekurangan'], 0, ',', '.'); ?></td>
-                  <td><?= number_format($row['total'], 0, ',', '.'); ?></td>
+                  <td><?php echo $no++; ?></td>
+                  <td><?php echo htmlspecialchars($row['nama'], ENT_QUOTES, 'UTF-8'); ?></td>
+                  <td><?php echo htmlspecialchars($row['bulan'], ENT_QUOTES, 'UTF-8'); ?></td>
+                  <td><?php echo number_format($row['minggu_1'], 0, ',', '.'); ?></td>
+                  <td><?php echo number_format($row['minggu_2'], 0, ',', '.'); ?></td>
+                  <td><?php echo number_format($row['minggu_3'], 0, ',', '.'); ?></td>
+                  <td><?php echo number_format($row['minggu_4'], 0, ',', '.'); ?></td>
+                  <td><?php echo number_format($row['dibayar'], 0, ',', '.'); ?></td>
+                  <td><?php echo number_format($row['kekurangan'], 0, ',', '.'); ?></td>
+                  <td><?php echo number_format($row['total'], 0, ',', '.'); ?></td>
                   <td class="no-print">
-                    <a href="#" type="button" class="fa fa-edit btn btn-primary btn-md" data-toggle="modal" data-target="#modalEditKas<?= $row['id_kas']; ?>"></a>
+                    <a href="#" type="button" class="fa fa-edit btn btn-primary btn-md" data-toggle="modal" data-target="#modalEditKas<?php echo $row['id_kas']; ?>"></a>
                   </td>
                 </tr>
 
                 <!-- Modal Edit Pembayaran Kas -->
-                <div class="modal fade" id="modalEditKas<?= $row['id_kas']; ?>" role="dialog">
+                <div class="modal fade" id="modalEditKas<?php echo $row['id_kas']; ?>" role="dialog">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -173,11 +179,11 @@ while ($row = mysqli_fetch_assoc($queryKas)) {
                       </div>
                       <div class="modal-body">
                         <form role="form" action="proses-edit-pembayaran.php" method="get">
-                          <input type="hidden" name="id_kas" value="<?= $row['id_kas']; ?>">
+                          <input type="hidden" name="id_kas" value="<?php echo $row['id_kas']; ?>">
 
                           <div class="form-group">
                             <label>Nama</label>
-                            <input type="text" name="nama" class="form-control" value="<?= htmlspecialchars($row['nama'], ENT_QUOTES, 'UTF-8'); ?>">
+                            <input type="text" name="nama" class="form-control" value="<?php echo htmlspecialchars($row['nama'], ENT_QUOTES, 'UTF-8'); ?>">
                           </div>
 
                           <div class="form-group">
@@ -185,32 +191,32 @@ while ($row = mysqli_fetch_assoc($queryKas)) {
                             <select class="form-control" name="bulan">
 <?php
 foreach ($bulanOptions as $b) {
-  $selected = ($row['bulan'] === $b) ? 'selected' : '';
-  echo '<option value="' . $b . '" ' . $selected . '>' . $b . '</option>';
+    $selected = ($row['bulan'] === $b) ? 'selected' : '';
+    echo '<option value="'.$b.'" '.$selected.'>'.$b.'</option>';
 }
-?>
+    ?>
                             </select>
                           </div>
 
                           <div class="form-group">
                             <label>Minggu yang dibayar</label><br>
 <?php
-$perMinggu = 2000;
-$check1 = $row['minggu_1'] >= $perMinggu ? 'checked' : '';
-$check2 = $row['minggu_2'] >= $perMinggu ? 'checked' : '';
-$check3 = $row['minggu_3'] >= $perMinggu ? 'checked' : '';
-$check4 = $row['minggu_4'] >= $perMinggu ? 'checked' : '';
-?>
-                            <label class="mr-2"><input type="checkbox" name="minggu_1" value="1" <?= $check1; ?>> Minggu 1</label>
-                            <label class="mr-2"><input type="checkbox" name="minggu_2" value="1" <?= $check2; ?>> Minggu 2</label>
-                            <label class="mr-2"><input type="checkbox" name="minggu_3" value="1" <?= $check3; ?>> Minggu 3</label>
-                            <label class="mr-2"><input type="checkbox" name="minggu_4" value="1" <?= $check4; ?>> Minggu 4</label>
+    $perMinggu = 2000;
+    $check1 = $row['minggu_1'] >= $perMinggu ? 'checked' : '';
+    $check2 = $row['minggu_2'] >= $perMinggu ? 'checked' : '';
+    $check3 = $row['minggu_3'] >= $perMinggu ? 'checked' : '';
+    $check4 = $row['minggu_4'] >= $perMinggu ? 'checked' : '';
+    ?>
+                            <label class="mr-2"><input type="checkbox" name="minggu_1" value="1" <?php echo $check1; ?>> Minggu 1</label>
+                            <label class="mr-2"><input type="checkbox" name="minggu_2" value="1" <?php echo $check2; ?>> Minggu 2</label>
+                            <label class="mr-2"><input type="checkbox" name="minggu_3" value="1" <?php echo $check3; ?>> Minggu 3</label>
+                            <label class="mr-2"><input type="checkbox" name="minggu_4" value="1" <?php echo $check4; ?>> Minggu 4</label>
                             <small class="form-text text-muted mt-2">Setiap minggu bernilai Rp. 2.000, total kas bulanan Rp. 8.000.</small>
                           </div>
 
                           <div class="modal-footer">
                             <button type="submit" class="btn btn-success">Simpan</button>
-                            <a href="hapus-pembayaran.php?id_kas=<?= $row['id_kas']; ?>" Onclick="confirm('Anda yakin ingin menghapus?')" class="btn btn-danger">Hapus</a>
+                            <a href="hapus-pembayaran.php?id_kas=<?php echo $row['id_kas']; ?>" Onclick="confirm('Anda yakin ingin menghapus?')" class="btn btn-danger">Hapus</a>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
                           </div>
                         </form>

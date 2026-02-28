@@ -42,13 +42,13 @@ require 'cek-sesi.php';
         <!-- Begin Page Content -->
         <div class="container-fluid">
 <?php
-if ($_SESSION['id'] == 1) {
-	$lihat = 'none';
+if (1 == $_SESSION['id']) {
+    $lihat = 'none';
 } else {
-	$lihat = 'hidden';
-};
+    $lihat = 'hidden';
+}
 ?>
-<button type="button" class="btn btn-success" style="margin:5px; visibility:<?=$lihat?>" data-toggle="modal" data-target="#myModalTambah"><i class="fa fa-plus"> Admin</i></button><br>
+<button type="button" class="btn btn-success" style="margin:5px; visibility:<?php echo $lihat; ?>" data-toggle="modal" data-target="#myModalTambah"><i class="fa fa-plus"> Admin</i></button><br>
 
 
           <!-- DataTales Example -->
@@ -71,21 +71,20 @@ if ($_SESSION['id'] == 1) {
                   <tfoot>
                   </tfoot>
                   <tbody>
-				  <?php 
-				  $id = $_SESSION['id'];
-if ($id == 1) {
-$query = mysqli_query($koneksi,"SELECT * FROM admin");
+				  <?php
+                  $id = $_SESSION['id'];
+if (1 == $id) {
+    $query = mysqli_query($koneksi, 'SELECT * FROM admin');
 } else {
-$query = mysqli_query($koneksi,"SELECT * FROM admin where id_admin = '$id'");
+    $query = mysqli_query($koneksi, "SELECT * FROM admin where id_admin = '{$id}'");
 }
-while ($data = mysqli_fetch_assoc($query)) 
-{
-?>
+while ($data = mysqli_fetch_assoc($query)) {
+    ?>
                     <tr>
-                      <td><?=$data['id_admin']?></td>
-                      <td><?=$data['nama']?></td>
-                      <td><?=$data['email']?></td>
-                      <td><?=$data['pass']?></td>
+                      <td><?php echo $data['id_admin']; ?></td>
+                      <td><?php echo $data['nama']; ?></td>
+                      <td><?php echo $data['email']; ?></td>
+                      <td><?php echo $data['pass']; ?></td>
 					  <td>
                     <!-- Button untuk modal -->
 <a href="#" type="button" class=" fa fa-edit btn btn-primary btn-md" data-toggle="modal" data-target="#myModal<?php echo $data['id_admin']; ?>"></a>
@@ -105,11 +104,11 @@ while ($data = mysqli_fetch_assoc($query))
 <form role="form" action="proses-edit-admin.php" method="get">
 
 <?php
-$id = $data['id_admin']; 
-$query_edit = mysqli_query($koneksi,"SELECT * FROM admin WHERE id_admin='$id'");
-//$result = mysqli_query($conn, $query);
-while ($row = mysqli_fetch_array($query_edit)) {  
-?>
+    $id = $data['id_admin'];
+    $query_edit = mysqli_query($koneksi, "SELECT * FROM admin WHERE id_admin='{$id}'");
+    // $result = mysqli_query($conn, $query);
+    while ($row = mysqli_fetch_array($query_edit)) {
+        ?>
 
 
 <input type="hidden" name="id_admin" value="<?php echo $row['id_admin']; ?>">
@@ -139,10 +138,10 @@ while ($row = mysqli_fetch_array($query_edit)) {
 <button type="submit" class="btn btn-success">Ubah</button>
 <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
 </div>
-<?php 
-}
-//mysql_close($host);
-?>  
+<?php
+    }
+    // mysql_close($host);
+    ?>  
        
 </form>
 </div>
@@ -186,8 +185,8 @@ while ($row = mysqli_fetch_array($query_edit)) {
   </div>
 
 
-<?php               
-} 
+<?php
+}
 ?>
                   </tbody>
                 </table>
@@ -202,7 +201,7 @@ while ($row = mysqli_fetch_array($query_edit)) {
       </div>
       <!-- End of Main Content -->
 
-<?php require 'footer.php'?>
+<?php require 'footer.php'; ?>
 
     </div>
     <!-- End of Content Wrapper -->
@@ -216,7 +215,7 @@ while ($row = mysqli_fetch_array($query_edit)) {
   </a>
 
   <!-- Logout Modal-->
-<?php require 'logout-modal.php';?>
+<?php require 'logout-modal.php'; ?>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>

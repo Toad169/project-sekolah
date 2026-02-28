@@ -31,57 +31,56 @@ require 'cek-sesi.php';
 <body id="page-top">
 
 <?php
-require ('koneksi.php');
-require ('sidebar.php');
+require 'koneksi.php';
 
-$karyawan = mysqli_query($koneksi, "SELECT * FROM karyawan");
+require 'sidebar.php';
+
+$karyawan = mysqli_query($koneksi, 'SELECT * FROM karyawan');
 $karyawan = mysqli_num_rows($karyawan);
 
-$res_pengeluaran_minggu = mysqli_query($koneksi, "SELECT COALESCE(SUM(jumlah), 0) AS total FROM pengeluaran WHERE YEARWEEK(tgl_pengeluaran, 1) = YEARWEEK(CURDATE(), 1)");
+$res_pengeluaran_minggu = mysqli_query($koneksi, 'SELECT COALESCE(SUM(jumlah), 0) AS total FROM pengeluaran WHERE YEARWEEK(tgl_pengeluaran, 1) = YEARWEEK(CURDATE(), 1)');
 $row = mysqli_fetch_array($res_pengeluaran_minggu);
 $pengeluaran_minggu_ini = isset($row['total']) ? (float) $row['total'] : 0;
 
-$res_pemasukan_minggu = mysqli_query($koneksi, "SELECT COALESCE(SUM(jumlah), 0) AS total FROM pemasukan WHERE YEARWEEK(tgl_pemasukan, 1) = YEARWEEK(CURDATE(), 1)");
+$res_pemasukan_minggu = mysqli_query($koneksi, 'SELECT COALESCE(SUM(jumlah), 0) AS total FROM pemasukan WHERE YEARWEEK(tgl_pemasukan, 1) = YEARWEEK(CURDATE(), 1)');
 $row = mysqli_fetch_array($res_pemasukan_minggu);
 $pemasukan_minggu_ini = isset($row['total']) ? (float) $row['total'] : 0;
 
-
-
 $arraymasuk = [];
-$pemasukan = mysqli_query($koneksi, "SELECT * FROM pemasukan");
+$pemasukan = mysqli_query($koneksi, 'SELECT * FROM pemasukan');
 while ($masuk = mysqli_fetch_array($pemasukan)) {
     $arraymasuk[] = $masuk['jumlah'];
 }
 $jumlahmasuk = array_sum($arraymasuk);
 
 $arraykeluar = [];
-$pengeluaran = mysqli_query($koneksi, "SELECT * FROM pengeluaran");
+$pengeluaran = mysqli_query($koneksi, 'SELECT * FROM pengeluaran');
 while ($keluar = mysqli_fetch_array($pengeluaran)) {
     $arraykeluar[] = $keluar['jumlah'];
 }
 $jumlahkeluar = array_sum($arraykeluar);
 
 // Total pembayaran kas (dibayar) masuk ke sisa uang
-$res_kas = mysqli_query($koneksi, "SELECT COALESCE(SUM(dibayar), 0) AS total_dibayar FROM pembayaran_kas");
+$res_kas = mysqli_query($koneksi, 'SELECT COALESCE(SUM(dibayar), 0) AS total_dibayar FROM pembayaran_kas');
 $row_kas = mysqli_fetch_array($res_kas);
 $total_dibayar_kas = isset($row_kas['total_dibayar']) ? (float) $row_kas['total_dibayar'] : 0;
 
 $uang = ($jumlahmasuk + $total_dibayar_kas) - $jumlahkeluar;
 
-//untuk data chart area (pendapatan per bulan)
+// untuk data chart area (pendapatan per bulan)
 
 $chartMonthLabels = [];
 $chartMonthValues = [];
-for ($i = 6; $i >= 0; $i--) {
+for ($i = 6; $i >= 0; --$i) {
     $sql = "
         SELECT COALESCE(SUM(jumlah), 0) AS total
         FROM pemasukan
-        WHERE YEAR(tgl_pemasukan) = YEAR(DATE_SUB(CURDATE(), INTERVAL $i MONTH))
-          AND MONTH(tgl_pemasukan) = MONTH(DATE_SUB(CURDATE(), INTERVAL $i MONTH))
+        WHERE YEAR(tgl_pemasukan) = YEAR(DATE_SUB(CURDATE(), INTERVAL {$i} MONTH))
+          AND MONTH(tgl_pemasukan) = MONTH(DATE_SUB(CURDATE(), INTERVAL {$i} MONTH))
     ";
     $r = mysqli_fetch_array(mysqli_query($koneksi, $sql));
     $chartMonthValues[] = isset($r['total']) ? (float) $r['total'] : 0;
-    $chartMonthLabels[] = date('M', strtotime("-$i month"));
+    $chartMonthLabels[] = date('M', strtotime("-{$i} month"));
 }
 ?>
       <!-- Main Content -->
@@ -96,7 +95,7 @@ for ($i = 6; $i >= 0; $i--) {
           </button>
 
           <!-- Topbar Search -->
-<h1> Selamat Datang, <?=$_SESSION['nama']?></h1>
+<h1> Selamat Datang, <?php echo $_SESSION['nama']; ?></h1>
 
 <?php require 'user.php'; ?>
 
@@ -122,7 +121,7 @@ for ($i = 6; $i >= 0; $i--) {
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Pendapatan (Minggu Ini)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.<?= number_format($pemasukan_minggu_ini, 2, ',', '.'); ?></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.<?php echo number_format($pemasukan_minggu_ini, 2, ',', '.'); ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -130,8 +129,8 @@ for ($i = 6; $i >= 0; $i--) {
                   </div>
                 </div> &nbsp Mingguan : Rp. 
 				<?php
-				echo number_format($jumlahmasuk,2,',','.');
-				?>
+                echo number_format($jumlahmasuk, 2, ',', '.');
+?>
 			</div>
             </div>
 
@@ -142,7 +141,7 @@ for ($i = 6; $i >= 0; $i--) {
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Pengeluaran (Minggu Ini)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.<?= number_format($pengeluaran_minggu_ini, 2, ',', '.'); ?></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.<?php echo number_format($pengeluaran_minggu_ini, 2, ',', '.'); ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -150,8 +149,8 @@ for ($i = 6; $i >= 0; $i--) {
                   </div>
                 </div> &nbsp Mingguan : Rp. 
 				<?php
-				echo number_format($jumlahkeluar,2,',','.');
-				?>
+echo number_format($jumlahkeluar, 2, ',', '.');
+?>
               </div>
             </div>
 
@@ -164,7 +163,7 @@ for ($i = 6; $i >= 0; $i--) {
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Sisa Uang</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Rp.<?=number_format($uang,2,',','.');?></div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Rp.<?php echo number_format($uang, 2, ',', '.'); ?></div>
                         </div>   
                       </div>
                     </div>
@@ -177,22 +176,20 @@ for ($i = 6; $i >= 0; $i--) {
                 <div class="col">
                           <!-- <div class="progress progress-sm mr-2">
 						  <?php
-						  if ($uang < 1 ){
-							  $warna = 'danger';
-							  $value = 0;
-						  }
-						  else if ($uang >= 1 && $uang < 1000000){
-						  $warna = 'warning';
-						  $value = 1;
-						  }
-						  else{
-							  $warna = 'info';
-							  $value = $uang / 10000;
-						  };
+          if ($uang < 1) {
+              $warna = 'danger';
+              $value = 0;
+          } elseif ($uang >= 1 && $uang < 1000000) {
+              $warna = 'warning';
+              $value = 1;
+          } else {
+              $warna = 'info';
+              $value = $uang / 10000;
+          }
+
+?>
 						  
-						  ?>
-						  
-                            <div class="progress-bar bg-<?=$warna?>" role="progressbar" style="width: 100%" aria-valuenow="<?=$value?>" aria-valuemin="0" aria-valuemax="100"><span><?=$value?> % </span></div>
+                            <div class="progress-bar bg-<?php echo $warna; ?>" role="progressbar" style="width: 100%" aria-valuenow="<?php echo $value; ?>" aria-valuemin="0" aria-valuemax="100"><span><?php echo $value; ?> % </span></div>
                           </div> -->
                         </div>
               </div>
@@ -205,7 +202,7 @@ for ($i = 6; $i >= 0; $i--) {
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Siswa</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?=$karyawan?></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $karyawan; ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -296,7 +293,7 @@ for ($i = 6; $i >= 0; $i--) {
       </div>
       <!-- End of Main Content -->
 
-<?php require 'footer.php'?>
+<?php require 'footer.php'; ?>
 
     </div>
     <!-- End of Content Wrapper -->
@@ -360,7 +357,7 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: [<?php echo "'" . implode("','", $chartMonthLabels) . "'"; ?>],
+    labels: [<?php echo "'".implode("','", $chartMonthLabels)."'"; ?>],
     datasets: [{
       label: "Pendapatan",
       lineTension: 0.3,
@@ -460,7 +457,7 @@ var myPieChart = new Chart(ctx, {
   data: {
     labels: ["Pendapatan", "Pengeluaran", "Sisa"],
     datasets: [{
-      data: [<?php echo $jumlahmasuk/1000000 ?>, <?php echo $jumlahkeluar/1000000 ?>, <?php echo $uang/1000000 ?>],
+      data: [<?php echo $jumlahmasuk / 1000000; ?>, <?php echo $jumlahkeluar / 1000000; ?>, <?php echo $uang / 1000000; ?>],
       backgroundColor: ['#4e73df', '#e74a3b', '#36b9cc'],
       hoverBackgroundColor: ['#2e59d9', '#e74a3b', '#2c9faf'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",

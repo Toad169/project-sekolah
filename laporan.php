@@ -31,8 +31,9 @@ require 'cek-sesi.php';
 
 <body id="page-top">
 
-<?php 
+<?php
 require 'koneksi.php';
+
 require 'sidebar.php'; ?>
 
       <!-- Main Content -->
@@ -62,33 +63,32 @@ require 'sidebar.php'; ?>
                   <tfoot>
                   </tfoot>
                   <tbody>
-				  <?php 
+				  <?php
 $arraymasuk = [];
-$pemasukan = mysqli_query($koneksi, "SELECT * FROM pemasukan");
+$pemasukan = mysqli_query($koneksi, 'SELECT * FROM pemasukan');
 while ($masuk = mysqli_fetch_array($pemasukan)) {
-  $arraymasuk[] = $masuk['jumlah'];
+    $arraymasuk[] = $masuk['jumlah'];
 }
 $jumlahmasuk = array_sum($arraymasuk);
 
 $arraykeluar = [];
-$pengeluaran = mysqli_query($koneksi, "SELECT * FROM pengeluaran");
+$pengeluaran = mysqli_query($koneksi, 'SELECT * FROM pengeluaran');
 while ($keluar = mysqli_fetch_array($pengeluaran)) {
-  $arraykeluar[] = $keluar['jumlah'];
+    $arraykeluar[] = $keluar['jumlah'];
 }
 $jumlahkeluar = array_sum($arraykeluar);
 
-
-$query1 = mysqli_query($koneksi,"SELECT id_pemasukan FROM pemasukan");
+$query1 = mysqli_query($koneksi, 'SELECT id_pemasukan FROM pemasukan');
 $query1 = mysqli_num_rows($query1);
 
-$query2 = mysqli_query($koneksi,"SELECT id_pengeluaran FROM pengeluaran");
+$query2 = mysqli_query($koneksi, 'SELECT id_pengeluaran FROM pengeluaran');
 $query2 = mysqli_num_rows($query2);
 $no = 1;
 ?>
                     <tr>
                       <td>Pemasukan</td>
-                      <td><?=$query1?></td>
-                      <td>Rp. <?=number_format($jumlahmasuk,2,',','.');?></td>
+                      <td><?php echo $query1; ?></td>
+                      <td>Rp. <?php echo number_format($jumlahmasuk, 2, ',', '.'); ?></td>
 					  <td>
                     <!-- Button untuk modal -->
 <a href="export-pemasukan.php" type="button" class="btn btn-primary btn-md"><i class="fa fa-download"></i></a>
@@ -97,8 +97,8 @@ $no = 1;
 
                     <tr>
                       <td>Pengeluaran</td>
-                      <td><?=$query2?></td>
-                      <td>Rp. <?=number_format($jumlahkeluar,2,',','.');?></td>
+                      <td><?php echo $query2; ?></td>
+                      <td>Rp. <?php echo number_format($jumlahkeluar, 2, ',', '.'); ?></td>
 					  <td>
                     <!-- Button untuk modal -->
 <a href="export-pengeluaran.php" type="button" class="btn btn-primary btn-md"><i class="fa fa-download"></i></a>
@@ -117,7 +117,7 @@ $no = 1;
       </div>
       <!-- End of Main Content -->
 
-<?php require 'footer.php'?>
+<?php require 'footer.php'; ?>
 
     </div>
     <!-- End of Content Wrapper -->
@@ -131,7 +131,7 @@ $no = 1;
   </a>
 
   <!-- Logout Modal-->
-<?php require 'logout-modal.php';?>
+<?php require 'logout-modal.php'; ?>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>

@@ -30,48 +30,48 @@ require 'cek-sesi.php';
 
 <body id="page-top">
 
-<?php 
+<?php
 require 'koneksi.php';
-require 'sidebar.php'; 
 
-$pendapatan = mysqli_query($koneksi, "SELECT id_pemasukan FROM pemasukan");
+require 'sidebar.php';
+
+$pendapatan = mysqli_query($koneksi, 'SELECT id_pemasukan FROM pemasukan');
 $pendapatan = mysqli_num_rows($pendapatan);
 
-$pengeluaran = mysqli_query($koneksi, "SELECT id_pengeluaran FROM pengeluaran");
+$pengeluaran = mysqli_query($koneksi, 'SELECT id_pengeluaran FROM pengeluaran');
 $pengeluaran = mysqli_num_rows($pengeluaran);
 
-$sekarang =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE()");
+$sekarang = mysqli_query($koneksi, 'SELECT jumlah FROM hutang
+WHERE tgl_hutang = CURDATE()');
 $sekarang = mysqli_fetch_array($sekarang);
 
-$satuhari =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE() - INTERVAL 1 DAY");
-$satuhari= mysqli_fetch_array($satuhari);
+$satuhari = mysqli_query($koneksi, 'SELECT jumlah FROM hutang
+WHERE tgl_hutang = CURDATE() - INTERVAL 1 DAY');
+$satuhari = mysqli_fetch_array($satuhari);
 
+$duahari = mysqli_query($koneksi, 'SELECT jumlah FROM hutang
+WHERE tgl_hutang = CURDATE() - INTERVAL 2 DAY');
+$duahari = mysqli_fetch_array($duahari);
 
-$duahari =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE() - INTERVAL 2 DAY");
-$duahari= mysqli_fetch_array($duahari);
+$tigahari = mysqli_query($koneksi, 'SELECT jumlah FROM hutang
+WHERE tgl_hutang = CURDATE() - INTERVAL 3 DAY');
+$tigahari = mysqli_fetch_array($tigahari);
 
-$tigahari =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE() - INTERVAL 3 DAY");
-$tigahari= mysqli_fetch_array($tigahari);
+$empathari = mysqli_query($koneksi, 'SELECT jumlah FROM hutang
+WHERE tgl_hutang = CURDATE() - INTERVAL 4 DAY');
+$empathari = mysqli_fetch_array($empathari);
 
-$empathari =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE() - INTERVAL 4 DAY");
-$empathari= mysqli_fetch_array($empathari);
+$limahari = mysqli_query($koneksi, 'SELECT jumlah FROM hutang
+WHERE tgl_hutang = CURDATE() - INTERVAL 5 DAY');
+$limahari = mysqli_fetch_array($limahari);
 
-$limahari =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE() - INTERVAL 5 DAY");
-$limahari= mysqli_fetch_array($limahari);
+$enamhari = mysqli_query($koneksi, 'SELECT jumlah FROM hutang
+WHERE tgl_hutang = CURDATE() - INTERVAL 6 DAY');
+$enamhari = mysqli_fetch_array($enamhari);
 
-$enamhari =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE() - INTERVAL 6 DAY");
-$enamhari= mysqli_fetch_array($enamhari);
-
-$tujuhhari =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE() - INTERVAL 7 DAY");
-$tujuhhari= mysqli_fetch_array($tujuhhari);
+$tujuhhari = mysqli_query($koneksi, 'SELECT jumlah FROM hutang
+WHERE tgl_hutang = CURDATE() - INTERVAL 7 DAY');
+$tujuhhari = mysqli_fetch_array($tujuhhari);
 
 ?>
 
@@ -184,18 +184,17 @@ $tujuhhari= mysqli_fetch_array($tujuhhari);
                     </tr>
                   </tfoot>
                   <tbody>
-				  <?php 
-$query = mysqli_query($koneksi,"SELECT * FROM hutang where jumlah > 1000 ORDER BY tgl_hutang DESC");
+				  <?php
+$query = mysqli_query($koneksi, 'SELECT * FROM hutang where jumlah > 1000 ORDER BY tgl_hutang DESC');
 $no = 1;
-while ($data = mysqli_fetch_assoc($query)) 
-{
-?>
+while ($data = mysqli_fetch_assoc($query)) {
+    ?>
                     <tr>
-					<td><?=$no++?></td>
-                      <td><?=$data['jumlah']?></td>
-                      <td><?=$data['tgl_hutang']?></td>
-                      <td><?=$data['alasan']?></td>
-                      <td><?=$data['penghutang']?></td>
+					<td><?php echo $no++; ?></td>
+                      <td><?php echo $data['jumlah']; ?></td>
+                      <td><?php echo $data['tgl_hutang']; ?></td>
+                      <td><?php echo $data['alasan']; ?></td>
+                      <td><?php echo $data['penghutang']; ?></td>
 					  <td>
                     <!-- Button untuk modal -->
 <a href="#" type="button" class=" fa fa-edit btn btn-primary btn-md" data-toggle="modal" data-target="#myModal<?php echo $data['id_hutang']; ?>"></a>
@@ -215,11 +214,11 @@ while ($data = mysqli_fetch_assoc($query))
 <form role="form" action="proses-edit-hutang.php" method="get">
 
 <?php
-$id = $data['id_hutang']; 
-$query_edit = mysqli_query($koneksi,"SELECT * FROM hutang WHERE id_hutang='$id'");
-//$result = mysqli_query($conn, $query);
-while ($row = mysqli_fetch_array($query_edit)) {  
-?>
+    $id = $data['id_hutang'];
+    $query_edit = mysqli_query($koneksi, "SELECT * FROM hutang WHERE id_hutang='{$id}'");
+    // $result = mysqli_query($conn, $query);
+    while ($row = mysqli_fetch_array($query_edit)) {
+        ?>
 
 
 <input type="hidden" name="id_hutang" value="<?php echo $row['id_hutang']; ?>">
@@ -246,13 +245,13 @@ while ($row = mysqli_fetch_array($query_edit)) {
 
 <div class="modal-footer">  
 <button type="submit" class="btn btn-success">Ubah</button>
-<a href="hapus-hutang.php?id_hutang=<?=$row['id_hutang'];?>" Onclick="confirm('Anda Yakin Ingin Menghapus?')" class="btn btn-danger">Hapus</a>
+<a href="hapus-hutang.php?id_hutang=<?php echo $row['id_hutang']; ?>" Onclick="confirm('Anda Yakin Ingin Menghapus?')" class="btn btn-danger">Hapus</a>
 <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
 </div>
-<?php 
-}
-//mysql_close($host);
-?>  
+<?php
+    }
+    // mysql_close($host);
+    ?>  
        
 </form>
 </div>
@@ -298,8 +297,8 @@ while ($row = mysqli_fetch_array($query_edit)) {
   </div>
 
 
-<?php               
-} 
+<?php
+}
 ?>
                   </tbody>
                 </table>
@@ -313,7 +312,7 @@ while ($row = mysqli_fetch_array($query_edit)) {
       </div>
       <!-- End of Main Content -->
 
-<?php require 'footer.php'?>
+<?php require 'footer.php'; ?>
 
     </div>
     <!-- End of Content Wrapper -->
@@ -327,7 +326,7 @@ while ($row = mysqli_fetch_array($query_edit)) {
   </a>
 
   <!-- Logout Modal-->
-<?php require 'logout-modal.php';?>
+<?php require 'logout-modal.php'; ?>
 
  
 
@@ -394,7 +393,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [<?php echo $tujuhhari['0']?>, <?php echo $enamhari['0'] ?>, <?php echo $limahari['0'] ?>, <?php echo $empathari['0'] ?>, <?php echo $tigahari['0'] ?>, <?php echo $duahari['0'] ?>, <?php echo $satuhari['0'] ?>],
+      data: [<?php echo $tujuhhari['0']; ?>, <?php echo $enamhari['0']; ?>, <?php echo $limahari['0']; ?>, <?php echo $empathari['0']; ?>, <?php echo $tigahari['0']; ?>, <?php echo $duahari['0']; ?>, <?php echo $satuhari['0']; ?>],
     }],
   },
   options: {
@@ -480,7 +479,7 @@ var myPieChart = new Chart(ctx, {
   data: {
     labels: ["Pendapatan", "Pengeluaran"],
     datasets: [{
-      data: [<?php echo $pendapatan ?>, <?php echo $pengeluaran ?>],
+      data: [<?php echo $pendapatan; ?>, <?php echo $pengeluaran; ?>],
       backgroundColor: ['#4e73df', '#e74a3b'],
       hoverBackgroundColor: ['#2e59d9', '#e74a3b'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",

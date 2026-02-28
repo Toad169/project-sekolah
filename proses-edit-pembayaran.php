@@ -1,4 +1,5 @@
 <?php
+
 require 'koneksi.php';
 
 $idKas = isset($_GET['id_kas']) ? (int) $_GET['id_kas'] : 0;
@@ -19,7 +20,7 @@ $kekurangan = $total - $dibayar;
 if ($idKas > 0) {
     $stmt = mysqli_prepare(
         $koneksi,
-        "UPDATE pembayaran_kas
+        'UPDATE pembayaran_kas
          SET nama = ?,
              minggu_1 = ?,
              minggu_2 = ?,
@@ -29,7 +30,7 @@ if ($idKas > 0) {
              dibayar = ?,
              total = ?,
              kekurangan = ?
-         WHERE id_kas = ?"
+         WHERE id_kas = ?'
     );
 
     if ($stmt) {
@@ -53,5 +54,5 @@ if ($idKas > 0) {
 }
 
 header('Location: pembayaran.php');
-exit;
 
+exit;

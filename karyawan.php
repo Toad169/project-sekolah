@@ -72,17 +72,16 @@ require 'cek-sesi.php';
                     </tr>
                   </tfoot>
                   <tbody>
-				  <?php 
-$query = mysqli_query($koneksi,"SELECT * FROM karyawan");
+				  <?php
+$query = mysqli_query($koneksi, 'SELECT * FROM karyawan');
 $no = 1;
-while ($data = mysqli_fetch_assoc($query)) 
-{
-?>
+while ($data = mysqli_fetch_assoc($query)) {
+    ?>
                     <tr>
-                      <td><?=$data['nama']?></td>
-                      <td><?=$data['posisi']?></td>
-                      <td><?=$data['umur']?></td>
-                      <td><?=$data['kontak']?></td>
+                      <td><?php echo $data['nama']; ?></td>
+                      <td><?php echo $data['posisi']; ?></td>
+                      <td><?php echo $data['umur']; ?></td>
+                      <td><?php echo $data['kontak']; ?></td>
 					  <td>
                     <!-- Button untuk modal -->
 <a href="#" type="button" class=" fa fa-edit btn btn-primary btn-md" data-toggle="modal" data-target="#myModal<?php echo $data['id_karyawan']; ?>"></a>
@@ -102,11 +101,11 @@ while ($data = mysqli_fetch_assoc($query))
 <form role="form" action="proses-edit-karyawan.php" method="get">
 
 <?php
-$id = $data['id_karyawan']; 
-$query_edit = mysqli_query($koneksi,"SELECT * FROM karyawan WHERE id_karyawan='$id'");
-//$result = mysqli_query($conn, $query);
-while ($row = mysqli_fetch_array($query_edit)) {  
-?>
+    $id = $data['id_karyawan'];
+    $query_edit = mysqli_query($koneksi, "SELECT * FROM karyawan WHERE id_karyawan='{$id}'");
+    // $result = mysqli_query($conn, $query);
+    while ($row = mysqli_fetch_array($query_edit)) {
+        ?>
 
 
 <input type="hidden" name="id_karyawan" value="<?php echo $row['id_karyawan']; ?>">
@@ -133,13 +132,13 @@ while ($row = mysqli_fetch_array($query_edit)) {
 
 <div class="modal-footer">  
 <button type="submit" class="btn btn-success">Ubah</button>
-<a href="hapus-karyawan.php?id_karyawan=<?=$row['id_karyawan'];?>" Onclick="confirm('Anda Yakin Ingin Menghapus?')" class="btn btn-danger">Hapus</a>
+<a href="hapus-karyawan.php?id_karyawan=<?php echo $row['id_karyawan']; ?>" Onclick="confirm('Anda Yakin Ingin Menghapus?')" class="btn btn-danger">Hapus</a>
 <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
 </div>
-<?php 
-}
-//mysql_close($host);
-?>  
+<?php
+    }
+    // mysql_close($host);
+    ?>  
        
 </form>
 </div>
@@ -150,8 +149,8 @@ while ($row = mysqli_fetch_array($query_edit)) {
 
 
 
-<?php               
-} 
+<?php
+}
 ?>
 
  <!-- Modal Tambah Anggota (di luar loop) -->
@@ -200,7 +199,7 @@ while ($row = mysqli_fetch_array($query_edit)) {
       </div>
       <!-- End of Main Content -->
 
-<?php require 'footer.php'?>
+<?php require 'footer.php'; ?>
 
     </div>
     <!-- End of Content Wrapper -->
@@ -214,7 +213,7 @@ while ($row = mysqli_fetch_array($query_edit)) {
   </a>
 
   <!-- Logout Modal-->
-<?php require 'logout-modal.php';?>
+<?php require 'logout-modal.php'; ?>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>

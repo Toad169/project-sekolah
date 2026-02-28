@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2019 at 08:11 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.3
+-- Generation Time: Feb 28, 2026 at 02:10 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `keuangan`
+-- Database: `keuangan_4`
 --
 
 -- --------------------------------------------------------
@@ -33,15 +32,14 @@ CREATE TABLE `admin` (
   `nama` varchar(40) NOT NULL,
   `email` varchar(40) NOT NULL,
   `pass` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id_admin`, `nama`, `email`, `pass`) VALUES
-(1, 'saiful', 'saiful@mail.com', 'tes123'),
-(2, 'riza', 'riza@mail.com', 'tes123');
+(1, 'Shandy', 'shandy@gmail.com', 'satria01');
 
 -- --------------------------------------------------------
 
@@ -52,7 +50,7 @@ INSERT INTO `admin` (`id_admin`, `nama`, `email`, `pass`) VALUES
 CREATE TABLE `catatan` (
   `id_catatan` int(11) NOT NULL,
   `catatan` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `catatan`
@@ -76,7 +74,7 @@ CREATE TABLE `hutang` (
   `tgl_hutang` date NOT NULL,
   `alasan` text NOT NULL,
   `penghutang` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `hutang`
@@ -112,15 +110,51 @@ CREATE TABLE `karyawan` (
   `alamat` varchar(40) NOT NULL,
   `umur` int(11) NOT NULL,
   `kontak` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `karyawan`
 --
 
 INSERT INTO `karyawan` (`id_karyawan`, `nama`, `posisi`, `alamat`, `umur`, `kontak`) VALUES
-(1, 'saiful', 'ketua', 'mns.aron', 19, '0888888'),
-(6, 'Riza', 'Bendahara', 'Aceh', 19, '08333333333');
+(9, 'ALISA SABRINA RIZKI', 'anggota', '', 15, '0812345678'),
+(10, 'VANESA PUTRI RAMADHANI', 'anggota', '', 15, '0812345678'),
+(11, 'RIZKIA YULIANA NIKMAH', 'anggota', '', 15, '0812345678'),
+(12, 'AENI SURYANINGTYAS', 'anggota', '', 15, '0812345678'),
+(13, 'DURROTUN NAFISAH', 'anggota', '', 15, '0812345678'),
+(14, 'MOHAMMAD FIKRI ALVIN', 'anggota', '', 15, '0812345678'),
+(15, 'MOHAMMAD FIKRI ALVIN', 'anggota', '', 15, '0812345678'),
+(16, 'AISYA NAZULA', 'anggota', '', 15, '0812345678'),
+(17, 'JIHAN RAMADHANI', 'anggota', '', 15, '0812345678'),
+(18, 'NEYSA AULYA PUTRI', 'anggota', '', 15, '0812345678'),
+(19, 'KURNIA NURUL BAROKAH', 'anggota', '', 15, '0812345678'),
+(20, 'FATMA NAILA HUSNA', 'anggota', '', 15, '0812345678'),
+(21, 'NEYSA AULIA PUTRI', 'anggota', '', 15, '0812345678'),
+(22, 'MUHAMMAD GUSNUL ARKHAMUL FIRDAUS', 'anggota', '', 15, '0812345678'),
+(23, 'MAHESA BIMAS EFFENDI', 'anggota', '', 15, '0812345678'),
+(24, 'AKHDA NURUL AZIZAH', 'anggota', '', 15, '0812345678'),
+(25, 'MUHAMMAD RAIHAN AMIN', 'anggota', '', 15, '0812345678'),
+(26, 'NOVANTYO WAHYU PRADI SETYANTO', 'anggota', '', 15, '0812345678'),
+(27, 'MUHAMMAD KHAIRUL AZZAM SAIFUL ANAM', 'anggota', '', 15, '0812345678'),
+(28, 'MUHAMMAD REYHAN YAQDHAN', 'anggota', '', 15, '0812345678'),
+(29, 'WAJID MAFIS SONI', 'anggota', '', 15, '0812345678'),
+(30, 'WAJID MAFIS SONI', 'anggota', '', 15, '0812345678'),
+(31, 'AHMAD RIFQI HIDAYAH', 'anggota', '', 15, '0812345678'),
+(32, 'MILLA APRILLIA', 'anggota', '', 15, '0812345678'),
+(33, 'FEBRIANA ARDIA PRAMESTI', 'Ketua Paskib', '', 16, '0897654321'),
+(34, 'LIANA PUTRI WULAN DARI', 'anggota', '', 16, '0897654321'),
+(35, 'EVA DWI AGUSTIN', 'Wakil Ketua 2', '', 16, '0897654321'),
+(36, 'RIRIN AYU SETIANINGSIH', 'anggota', '', 16, '0897654321'),
+(37, 'FRISCA CANDRA AMIRA', 'Bendahara', '', 16, '0897654321'),
+(38, 'MAULIDA KHASANAH', 'Sekertaris', '', 16, '0897654321'),
+(39, 'FARIDAH NABILAH ZAHRAH', 'Sekertaris', '', 16, '0897654321'),
+(40, 'HAFIZATUN NAFSIYAH', 'anggota', '', 16, '0897654321'),
+(41, 'SATRIO DIMAS PRAYOGA', 'Wakil Ketua 1', '', 16, '0897654321'),
+(42, 'MUHAMMAD RAFI RAMADHAN', 'anggota', '', 16, '0897654321'),
+(43, 'RESTU BAYU PRATAMA', 'anggota', '', 16, '0897654321'),
+(44, 'ZIMA KHOLIFATUL MUZZA', 'Bendahara 2', '', 16, '0897654321'),
+(45, 'LATIFATUZ ZAHRA RAMANDHANI', 'Sekertaris 2', '', 16, '0897654321'),
+(46, 'BELVA ARMIDA AULIA', 'anggota', '', 16, '0897654321');
 
 -- --------------------------------------------------------
 
@@ -132,35 +166,92 @@ CREATE TABLE `pemasukan` (
   `id_pemasukan` int(11) NOT NULL,
   `tgl_pemasukan` date NOT NULL,
   `jumlah` int(11) NOT NULL,
-  `id_sumber` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `keterangan` varchar(100) NOT NULL,
+  `id_sumber` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `pemasukan`
 --
 
-INSERT INTO `pemasukan` (`id_pemasukan`, `tgl_pemasukan`, `jumlah`, `id_sumber`) VALUES
-(1, '2019-10-16', 100000, 1),
-(2, '2019-10-24', 500000, 1),
-(3, '2019-10-17', 200000, 5),
-(4, '2019-10-18', 400000, 3),
-(5, '2019-10-19', 5000000, 1),
-(6, '2019-10-20', 100000, 4),
-(7, '2019-10-21', 2300000, 3),
-(8, '2019-10-22', 2000000, 2),
-(9, '2019-10-23', 1500000, 5),
-(10, '2019-10-15', 100000, 1),
-(13, '2019-10-17', 200000, 1),
-(14, '2019-10-09', 200000, 1),
-(15, '2019-10-19', 200000, 3),
-(16, '2019-10-02', 200000, 4),
-(17, '2019-10-07', 20000, 5),
-(18, '2019-10-26', 50000, 1),
-(19, '2019-10-27', 2000000, 2),
-(20, '2019-10-28', 590000, 3),
-(21, '2019-10-29', 600000, 4),
-(22, '2019-10-30', 600000, 5),
-(23, '2019-10-25', 7000000, 1);
+INSERT INTO `pemasukan` (`id_pemasukan`, `tgl_pemasukan`, `jumlah`, `keterangan`, `id_sumber`) VALUES
+(25, '2025-06-27', 358000, 'uang kas bulan juni', NULL),
+(26, '2025-05-29', 370000, 'uang kas bulan mei', NULL),
+(27, '2024-09-16', 1256000, 'anggaran paskib', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pembayaran_kas`
+--
+
+CREATE TABLE `pembayaran_kas` (
+  `id_kas` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `minggu_1` int(11) DEFAULT 0,
+  `minggu_2` int(11) DEFAULT 0,
+  `minggu_3` int(11) DEFAULT 0,
+  `minggu_4` int(11) DEFAULT 0,
+  `bulan` varchar(20) NOT NULL,
+  `dibayar` int(11) DEFAULT 0,
+  `kekurangan` int(11) DEFAULT 0,
+  `total` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `pembayaran_kas`
+--
+
+INSERT INTO `pembayaran_kas` (`id_kas`, `nama`, `minggu_1`, `minggu_2`, `minggu_3`, `minggu_4`, `bulan`, `dibayar`, `kekurangan`, `total`) VALUES
+(7, 'BELVA ARMIDA AULIA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(8, 'LATIFATUZ ZAHRA RAMANDHANI', 0, 2000, 2000, 2000, 'Juni', 6000, 2000, 8000),
+(9, 'ZIMA KHOLIFATUL MUZZA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(10, 'RESTU BAYU PRATAMA', 0, 2000, 2000, 2000, 'Juni', 6000, 2000, 8000),
+(11, 'MUHAMMAD RAFI RAMADHAN', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(12, 'SATRIO DIMAS PRAYOGA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(13, 'HAFIZATUN NAFSIYAH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(14, 'FARIDAH NABILAH ZAHRAH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(15, 'MAULIDA KHASANAH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(16, 'FRISCA CANDRA AMIRA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(17, 'RIRIN AYU SETIANINGSIH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(18, 'EVA DWI AGUSTIN', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(19, 'LIANA PUTRI WULAN DARI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(20, 'FEBRIANA ARDIA PRAMESTI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(21, 'MILLA APRILLIA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(22, 'AHMAD RIFQI HIDAYAH', 0, 2000, 2000, 2000, 'Juni', 6000, 2000, 8000),
+(23, 'MUHAMMAD SYAFI`I', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(24, 'WAJID MAFIS SONI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(25, 'MUHAMMAD REYHAN YAQDHAN', 0, 0, 0, 0, 'Juni', 0, 8000, 8000),
+(26, 'MUHAMMAD KHAIRUL AZZAM SAIFUL ANAM', 0, 0, 2000, 0, 'Juni', 2000, 6000, 8000),
+(27, 'NOVANTYO WAHYU PRADI SETYANTO', 2000, 2000, 0, 0, 'Juni', 4000, 4000, 8000),
+(28, 'MUHAMMAD RAIHAN AMIN', 2000, 2000, 2000, 0, 'Juni', 6000, 2000, 8000),
+(29, 'AKHDA NURUL AZIZAH', 0, 2000, 2000, 2000, 'Juni', 6000, 2000, 8000),
+(30, 'MAHESA BIMAS EFFENDI', 0, 2000, 2000, 0, 'Juni', 4000, 4000, 8000),
+(31, 'MUHAMMAD GUSNUL ARKHAMUL FIRDAUS', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(32, 'NEYSA AULIA PUTRI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(33, 'FATMA NAILA HUSNA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(34, 'KURNIA NURUL BAROKAH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(35, 'NEYSA AULYA PUTRI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(36, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(37, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(38, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(39, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(40, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(41, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(42, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(43, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(44, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(45, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(46, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(47, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(48, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(49, 'AISYA NAZULA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(50, 'MOHAMMAD FIKRI ALVIN', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(51, 'DURROTUN NAFISAH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(52, 'AENI SURYANINGTYAS', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(53, 'RIZKIA YULIANA NIKMAH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(54, 'VANESA PUTRI RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
+(55, 'ALISA SABRINA RIZKI', 0, 2000, 2000, 2000, 'Juni', 6000, 2000, 8000);
 
 -- --------------------------------------------------------
 
@@ -172,32 +263,20 @@ CREATE TABLE `pengeluaran` (
   `id_pengeluaran` int(11) NOT NULL,
   `tgl_pengeluaran` date NOT NULL,
   `jumlah` int(11) NOT NULL,
-  `id_sumber` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `keterangan` varchar(100) NOT NULL,
+  `id_sumber` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `pengeluaran`
 --
 
-INSERT INTO `pengeluaran` (`id_pengeluaran`, `tgl_pengeluaran`, `jumlah`, `id_sumber`) VALUES
-(1, '2019-10-22', 1100000, 10),
-(3, '2019-10-16', 200000, 7),
-(4, '2019-10-17', 3000000, 6),
-(5, '2019-10-18', 100000, 7),
-(6, '2019-10-19', 150000, 6),
-(7, '2019-10-20', 100000, 7),
-(8, '2019-10-21', 150000, 6),
-(9, '2019-10-23', 123000, 9),
-(10, '2019-10-15', 600000, 6),
-(11, '2019-10-13', 20000, 7),
-(12, '2019-10-12', 300000, 9),
-(13, '2019-10-24', 500000, 8),
-(14, '2019-10-30', 121212, 6),
-(15, '2019-10-25', 60000, 6),
-(16, '2019-10-26', 70000, 7),
-(17, '2019-10-27', 60000, 8),
-(18, '2019-10-28', 78000, 9),
-(19, '2019-10-29', 79000, 10);
+INSERT INTO `pengeluaran` (`id_pengeluaran`, `tgl_pengeluaran`, `jumlah`, `keterangan`, `id_sumber`) VALUES
+(21, '2025-04-17', 25000, 'print materi paskibraka', NULL),
+(22, '2025-04-08', 400000, 'kopel satpam', NULL),
+(23, '2025-03-13', 740000, 'peci paskibraka', NULL),
+(24, '2025-02-01', 272000, 'topi paskibra ', NULL),
+(25, '2025-02-04', 112000, 'bet paskib', NULL);
 
 -- --------------------------------------------------------
 
@@ -208,7 +287,7 @@ INSERT INTO `pengeluaran` (`id_pengeluaran`, `tgl_pengeluaran`, `jumlah`, `id_su
 CREATE TABLE `sumber` (
   `id_sumber` int(11) NOT NULL,
   `nama` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `sumber`
@@ -238,7 +317,7 @@ CREATE TABLE `uang` (
   `id_pengeluaran` int(11) DEFAULT NULL,
   `id_pendapatan` int(11) DEFAULT NULL,
   `jumlah` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `uang`
@@ -282,6 +361,12 @@ ALTER TABLE `karyawan`
 ALTER TABLE `pemasukan`
   ADD PRIMARY KEY (`id_pemasukan`),
   ADD KEY `id_sumber` (`id_sumber`);
+
+--
+-- Indexes for table `pembayaran_kas`
+--
+ALTER TABLE `pembayaran_kas`
+  ADD PRIMARY KEY (`id_kas`);
 
 --
 -- Indexes for table `pengeluaran`
@@ -328,19 +413,25 @@ ALTER TABLE `hutang`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `pemasukan`
 --
 ALTER TABLE `pemasukan`
-  MODIFY `id_pemasukan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_pemasukan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `pembayaran_kas`
+--
+ALTER TABLE `pembayaran_kas`
+  MODIFY `id_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `id_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `sumber`

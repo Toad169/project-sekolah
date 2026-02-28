@@ -1,4 +1,5 @@
 <?php
+
 require 'koneksi.php';
 
 $nama = isset($_GET['nama']) ? $_GET['nama'] : '';
@@ -17,8 +18,8 @@ $kekurangan = $total - $dibayar;
 
 $stmt = mysqli_prepare(
     $koneksi,
-    "INSERT INTO pembayaran_kas (nama, minggu_1, minggu_2, minggu_3, minggu_4, bulan, dibayar, total, kekurangan)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    'INSERT INTO pembayaran_kas (nama, minggu_1, minggu_2, minggu_3, minggu_4, bulan, dibayar, total, kekurangan)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
 );
 
 if ($stmt) {
@@ -40,5 +41,5 @@ if ($stmt) {
 }
 
 header('Location: pembayaran.php');
-exit;
 
+exit;

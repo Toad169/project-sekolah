@@ -1,6 +1,7 @@
 <?php
-//include('dbconnected.php');
-include('koneksi.php');
+
+// include('dbconnected.php');
+include 'koneksi.php';
 
 $nama = $_GET['nama'];
 $posisi = $_GET['posisi'];
@@ -8,16 +9,14 @@ $umur = $_GET['umur'];
 $kontak = $_GET['kontak'];
 $alamat = '';
 
-//query update
-$query = mysqli_query($koneksi,"INSERT INTO `karyawan` (`id_karyawan`, `nama`, `posisi`, `alamat`, `umur`, `kontak`) VALUES (null, '$nama', '$posisi', '$alamat', '$umur', '$kontak')");
+// query update
+$query = mysqli_query($koneksi, "INSERT INTO `karyawan` (`id_karyawan`, `nama`, `posisi`, `alamat`, `umur`, `kontak`) VALUES (null, '{$nama}', '{$posisi}', '{$alamat}', '{$umur}', '{$kontak}')");
 
 if ($query) {
- # credirect ke page index
- header("location:karyawan.php"); 
-}
-else{
- echo "ERROR, data gagal diupdate". mysqli_error($koneksi);
+    // credirect ke page index
+    header('location:karyawan.php');
+} else {
+    echo 'ERROR, data gagal diupdate'.mysqli_error($koneksi);
 }
 
-//mysql_close($host);
-?>
+// mysql_close($host);
