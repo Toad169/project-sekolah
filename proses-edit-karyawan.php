@@ -17,7 +17,7 @@ if ($query) {
     // credirect ke page index
     header('location:karyawan.php');
 } else {
-    echo 'ERROR, data gagal diupdate'.mysql_error();
+    echo 'ERROR, data gagal diupdate: '.mysqli_error($koneksi);
 }
 
 // mysql_close($host);
