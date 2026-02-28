@@ -20,6 +20,7 @@ require 'cek-sesi.php';
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="css/paskibra-theme.css" rel="stylesheet">
 
   <!-- Tailwind CSS, HTMX, AlpineJS -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -91,11 +92,14 @@ for ($i = 6; $i >= 0; --$i) {
 
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
+            <i class="fa fa-bars text-primary"></i>
           </button>
 
-          <!-- Topbar Search -->
-<h1> Selamat Datang, <?php echo $_SESSION['nama']; ?></h1>
+          <!-- Brand -->
+          <div class="d-flex flex-column">
+            <div class="h5 mb-0 font-weight-bold text-primary">Kas Paskibra</div>
+            <div class="small text-gray-600">Selamat datang, <?= htmlspecialchars($_SESSION['nama'], ENT_QUOTES, 'UTF-8'); ?></div>
+          </div>
 
 <?php require 'user.php'; ?>
 
@@ -108,7 +112,7 @@ for ($i = 6; $i >= 0; --$i) {
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="export-semua.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download Laporan</a>
+            <!-- <a href="export-semua.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download Laporan</a> -->
           </div>
 
           <!-- Content Row -->
@@ -361,14 +365,14 @@ var myLineChart = new Chart(ctx, {
     datasets: [{
       label: "Pendapatan",
       lineTension: 0.3,
-      backgroundColor: "rgba(78, 115, 223, 0.05)",
-      borderColor: "rgba(78, 115, 223, 1)",
+      backgroundColor: "#0f766e",
+      borderColor: "#0f766e",
       pointRadius: 3,
-      pointBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointBorderColor: "rgba(78, 115, 223, 1)",
+      pointBackgroundColor: "#0f766e",
+      pointBorderColor: "#0f766e",
       pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+      pointHoverBackgroundColor: "#065f46",
+      pointHoverBorderColor: "#065f46",
       pointHitRadius: 10,
       pointBorderWidth: 2,
       data: [<?php echo implode(', ', $chartMonthValues); ?>],
@@ -458,8 +462,8 @@ var myPieChart = new Chart(ctx, {
     labels: ["Pendapatan", "Pengeluaran", "Sisa"],
     datasets: [{
       data: [<?php echo $jumlahmasuk / 1000000; ?>, <?php echo $jumlahkeluar / 1000000; ?>, <?php echo $uang / 1000000; ?>],
-      backgroundColor: ['#4e73df', '#e74a3b', '#36b9cc'],
-      hoverBackgroundColor: ['#2e59d9', '#e74a3b', '#2c9faf'],
+      backgroundColor: ['#0f766e', '#e74a3b', '#36b9cc'],
+      hoverBackgroundColor: ['#065f46', '#e74a3b', '#2c9faf'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
     }],
   },

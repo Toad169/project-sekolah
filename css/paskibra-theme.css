@@ -1,0 +1,154 @@
+/* Paskibra Green/White theme overrides for SB Admin 2 (Bootstrap 4) */
+:root {
+  --primary: #10b981; /* emerald */
+  --blue: #10b981;
+  --info: #10b981;
+}
+
+body {
+  background-color: #f8fffb;
+}
+
+/* Links */
+a {
+  color: #0f766e;
+}
+a:hover,
+a:focus {
+  color: #065f46;
+}
+
+/* Sidebar emerald gradient */
+.bg-gradient-primary {
+  background-color: #0f766e !important;
+  background-image: linear-gradient(180deg, #10b981 10%, #0f766e 100%) !important;
+  background-size: cover !important;
+}
+
+.sidebar-dark .nav-item .nav-link {
+  color: rgba(255, 255, 255, 0.9);
+}
+.sidebar-dark .nav-item .nav-link i {
+  color: rgba(255, 255, 255, 0.85);
+}
+.sidebar-dark .nav-item .nav-link:active,
+.sidebar-dark .nav-item .nav-link:focus,
+.sidebar-dark .nav-item .nav-link:hover {
+  color: #ffffff;
+}
+.sidebar-dark .nav-item.active .nav-link {
+  color: #ffffff;
+  font-weight: 700;
+}
+.sidebar .sidebar-brand {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+.sidebar .sidebar-brand .sidebar-brand-text {
+  letter-spacing: 0.02em;
+}
+.sidebar-heading {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Primary text/borders */
+.text-primary {
+  color: #0f766e !important;
+}
+.border-left-primary {
+  border-left: 0.25rem solid #10b981 !important;
+}
+.bg-primary {
+  background-color: #10b981 !important;
+}
+.badge-primary {
+  background-color: #10b981 !important;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #10b981 !important;
+  border-color: #10b981 !important;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #0f766e !important;
+  border-color: #0f766e !important;
+}
+.btn-primary:focus,
+.btn-primary.focus {
+  box-shadow: 0 0 0 0.2rem rgba(16, 185, 129, 0.35) !important;
+}
+
+.btn-outline-primary {
+  color: #10b981 !important;
+  border-color: #10b981 !important;
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  color: #ffffff !important;
+  background-color: #10b981 !important;
+  border-color: #10b981 !important;
+}
+
+/* Cards */
+.card {
+  border-radius: 0.75rem;
+}
+.card-header {
+  background-color: #ecfdf5;
+  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* Topbar + footer */
+.topbar {
+  border-bottom: 1px solid rgba(16, 185, 129, 0.18);
+}
+.sticky-footer {
+  border-top: 1px solid rgba(16, 185, 129, 0.12);
+}
+
+/* Forms */
+.form-control:focus {
+  border-color: rgba(16, 185, 129, 0.55);
+  box-shadow: 0 0 0 0.2rem rgba(16, 185, 129, 0.18);
+}
+
+/* DataTables + pagination */
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dataTables_length select {
+  border-radius: 0.5rem;
+}
+
+.custom-select:focus,
+select.form-control:focus {
+  border-color: rgba(16, 185, 129, 0.55);
+  box-shadow: 0 0 0 0.2rem rgba(16, 185, 129, 0.18);
+}
+
+.table thead th {
+  background-color: #ecfdf5;
+}
+.page-item.active .page-link {
+  background-color: #10b981 !important;
+  border-color: #10b981 !important;
+}
+.page-link {
+  color: #0f766e;
+}
+.page-link:hover,
+.page-link:focus {
+  color: #065f46;
+}
+
+table.table thead th {
+  border-bottom-color: rgba(16, 185, 129, 0.25);
+}
+
+.table-bordered th,
+.table-bordered td {
+  border-color: rgba(16, 185, 129, 0.18);
+}
+

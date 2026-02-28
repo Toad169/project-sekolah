@@ -20,6 +20,7 @@ require 'cek-sesi.php';
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="css/paskibra-theme.css" rel="stylesheet">
 
   <!-- Tailwind CSS, HTMX, AlpineJS -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
