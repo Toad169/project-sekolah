@@ -88,17 +88,17 @@ for ($i = 6; $i >= 0; --$i) {
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow-sm rounded-b-lg px-4">
 
           <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-full p-2 mr-3 text-primary transition duration-200" type="button" aria-label="Toggle menu">
             <i class="fa fa-bars text-primary"></i>
           </button>
 
           <!-- Brand -->
-          <div class="d-flex flex-column">
-            <div class="h5 mb-0 font-weight-bold text-primary">Kas Paskibra</div>
-            <div class="small text-gray-600">Selamat datang, <?= htmlspecialchars($_SESSION['nama'], ENT_QUOTES, 'UTF-8'); ?></div>
+          <div class="d-flex flex-column flex-grow-1">
+            <span class="text-lg font-bold text-primary tracking-tight">Kas Paskibra</span>
+            <span class="text-sm text-gray-500">Selamat datang, <?= htmlspecialchars($_SESSION['nama'], ENT_QUOTES, 'UTF-8'); ?></span>
           </div>
 
 <?php require 'user.php'; ?>

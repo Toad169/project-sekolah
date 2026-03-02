@@ -14,7 +14,7 @@ function navActive(string $page, string $current): string
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon">
-          <img src="img/sekolah/paskibra.png" alt="Logo" width="80%" height="80%">
+          <img src="img/sekolah/paskibra.png" alt="Logo" width="70%" height="70%">
         </div>
         <div class="sidebar-brand-text mx-4">Kas Paskibra</div>
       </a>
