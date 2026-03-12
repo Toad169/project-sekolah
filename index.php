@@ -68,19 +68,35 @@ $total_dibayar_kas = isset($row_kas['total_dibayar']) ? (float) $row_kas['total_
 
 $uang = ($jumlahmasuk + $total_dibayar_kas) - $jumlahkeluar;
 
-// untuk data chart area (pendapatan per bulan)
+// untuk data chart area (pendapatan dan pengeluaran per bulan)
 
 $chartMonthLabels = [];
-$chartMonthValues = [];
+$chartPemasukanValues = [];
+$chartPengeluaranValues = [];
+
 for ($i = 6; $i >= 0; --$i) {
-    $sql = "
+    $targetDate = date('Y-m-01', strtotime("-{$i} month"));
+    $monthStart = date('Y-m-d', strtotime($targetDate));
+    $monthEnd = date('Y-m-t', strtotime($targetDate));
+    
+    // Query for pemasukan (income)
+    $sqlMasuk = "
         SELECT COALESCE(SUM(jumlah), 0) AS total
         FROM pemasukan
-        WHERE YEAR(tgl_pemasukan) = YEAR(DATE_SUB(CURDATE(), INTERVAL {$i} MONTH))
-          AND MONTH(tgl_pemasukan) = MONTH(DATE_SUB(CURDATE(), INTERVAL {$i} MONTH))
+        WHERE tgl_pemasukan >= '{$monthStart}' AND tgl_pemasukan <= '{$monthEnd}'
     ";
-    $r = mysqli_fetch_array(mysqli_query($koneksi, $sql));
-    $chartMonthValues[] = isset($r['total']) ? (float) $r['total'] : 0;
+    $rMasuk = mysqli_fetch_array(mysqli_query($koneksi, $sqlMasuk));
+    $chartPemasukanValues[] = isset($rMasuk['total']) ? (float) $rMasuk['total'] : 0;
+    
+    // Query for pengeluaran (expenses)
+    $sqlKeluar = "
+        SELECT COALESCE(SUM(jumlah), 0) AS total
+        FROM pengeluaran
+        WHERE tgl_pengeluaran >= '{$monthStart}' AND tgl_pengeluaran <= '{$monthEnd}'
+    ";
+    $rKeluar = mysqli_fetch_array(mysqli_query($koneksi, $sqlKeluar));
+    $chartPengeluaranValues[] = isset($rKeluar['total']) ? (float) $rKeluar['total'] : 0;
+    
     $chartMonthLabels[] = date('M', strtotime("-{$i} month"));
 }
 ?>
@@ -226,7 +242,7 @@ echo number_format($jumlahkeluar, 2, ',', '.');
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Pendapatan Bulan Ini</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Pemasukan & Pengeluaran (7 Bulan Terakhir)</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -363,19 +379,37 @@ var myLineChart = new Chart(ctx, {
   data: {
     labels: [<?php echo "'".implode("','", $chartMonthLabels)."'"; ?>],
     datasets: [{
-      label: "Pendapatan",
+      label: "Pemasukan",
       lineTension: 0.3,
-      backgroundColor: "#0f766e",
+      backgroundColor: "rgba(15, 118, 110, 0.1)",
       borderColor: "#0f766e",
       pointRadius: 3,
       pointBackgroundColor: "#0f766e",
-      pointBorderColor: "#0f766e",
-      pointHoverRadius: 3,
-      pointHoverBackgroundColor: "#065f46",
-      pointHoverBorderColor: "#065f46",
+      pointBorderColor: "#fff",
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "#0f766e",
+      pointHoverBorderColor: "#fff",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [<?php echo implode(', ', $chartMonthValues); ?>],
+      borderWidth: 2,
+      fill: true,
+      data: [<?php echo implode(', ', $chartPemasukanValues); ?>],
+    }, {
+      label: "Pengeluaran",
+      lineTension: 0.3,
+      backgroundColor: "rgba(231, 74, 59, 0.1)",
+      borderColor: "#e74a3b",
+      pointRadius: 3,
+      pointBackgroundColor: "#e74a3b",
+      pointBorderColor: "#fff",
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "#e74a3b",
+      pointHoverBorderColor: "#fff",
+      pointHitRadius: 10,
+      pointBorderWidth: 2,
+      borderWidth: 2,
+      fill: true,
+      data: [<?php echo implode(', ', $chartPengeluaranValues); ?>],
     }],
   },
   options: {
@@ -420,7 +454,14 @@ var myLineChart = new Chart(ctx, {
       }],
     },
     legend: {
-      display: false
+      display: true,
+      position: 'top',
+      labels: {
+        fontColor: '#858796',
+        fontSize: 12,
+        usePointStyle: true,
+        padding: 15
+      }
     },
     tooltips: {
       backgroundColor: "rgb(255,255,255)",
