@@ -407,7 +407,7 @@ var myLineChart = new Chart(ctx, {
         bottom: 0
       }
     },
-    scales: {
+    scales: {n 
       xAxes: [{
         time: {
           unit: 'date'

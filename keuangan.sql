@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2026 at 02:10 AM
+-- Generation Time: Apr 16, 2026 at 02:49 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `keuangan_4`
+-- Database: `keuangan`
 --
 
 -- --------------------------------------------------------
@@ -39,7 +39,11 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `nama`, `email`, `pass`) VALUES
-(1, 'Shandy', 'shandy@gmail.com', 'satria01');
+(1, 'Shandy', 'shandy@gmail.com', 'satria01'),
+(3, 'Aku', 'admin@admin.com', 'admin'),
+(4, 'alya putri iftitah', 'oke@gmail.com', 'satria01'),
+(5, 'zulia riska', 'halo@gmail.com', 'satria01'),
+(6, 'zulia riska', 'gatau@gmail.com', 'satria01');
 
 -- --------------------------------------------------------
 
@@ -154,7 +158,8 @@ INSERT INTO `karyawan` (`id_karyawan`, `nama`, `posisi`, `alamat`, `umur`, `kont
 (43, 'RESTU BAYU PRATAMA', 'anggota', '', 16, '0897654321'),
 (44, 'ZIMA KHOLIFATUL MUZZA', 'Bendahara 2', '', 16, '0897654321'),
 (45, 'LATIFATUZ ZAHRA RAMANDHANI', 'Sekertaris 2', '', 16, '0897654321'),
-(46, 'BELVA ARMIDA AULIA', 'anggota', '', 16, '0897654321');
+(46, 'BELVA ARMIDA AULIA', 'anggota', '', 16, '0897654321'),
+(49, 'muklis ahmad', 'anggota', '', 16, '08135678910');
 
 -- --------------------------------------------------------
 
@@ -177,7 +182,8 @@ CREATE TABLE `pemasukan` (
 INSERT INTO `pemasukan` (`id_pemasukan`, `tgl_pemasukan`, `jumlah`, `keterangan`, `id_sumber`) VALUES
 (25, '2025-06-27', 358000, 'uang kas bulan juni', NULL),
 (26, '2025-05-29', 370000, 'uang kas bulan mei', NULL),
-(27, '2024-09-16', 1256000, 'anggaran paskib', NULL);
+(27, '2024-09-16', 1256000, 'anggaran paskib', NULL),
+(33, '2026-04-08', 5000, 'kas', NULL);
 
 -- --------------------------------------------------------
 
@@ -231,19 +237,6 @@ INSERT INTO `pembayaran_kas` (`id_kas`, `nama`, `minggu_1`, `minggu_2`, `minggu_
 (32, 'NEYSA AULIA PUTRI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
 (33, 'FATMA NAILA HUSNA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
 (34, 'KURNIA NURUL BAROKAH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(35, 'NEYSA AULYA PUTRI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(36, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(37, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(38, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(39, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(40, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(41, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(42, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(43, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(44, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(45, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(46, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(47, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
 (48, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
 (49, 'AISYA NAZULA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
 (50, 'MOHAMMAD FIKRI ALVIN', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
@@ -251,7 +244,10 @@ INSERT INTO `pembayaran_kas` (`id_kas`, `nama`, `minggu_1`, `minggu_2`, `minggu_
 (52, 'AENI SURYANINGTYAS', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
 (53, 'RIZKIA YULIANA NIKMAH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
 (54, 'VANESA PUTRI RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(55, 'ALISA SABRINA RIZKI', 0, 2000, 2000, 2000, 'Juni', 6000, 2000, 8000);
+(55, 'ALISA SABRINA RIZKI', 0, 2000, 2000, 2000, 'Juni', 6000, 2000, 8000),
+(58, 'saya sendiri', 0, 0, 0, 0, 'Juni', 0, 8000, 8000),
+(61, 'alya ', 2000, 2000, 0, 2000, 'Juni', 6000, 2000, 8000),
+(62, 'alya ', 2000, 2000, 0, 2000, 'Juni', 6000, 2000, 8000);
 
 -- --------------------------------------------------------
 
@@ -276,7 +272,8 @@ INSERT INTO `pengeluaran` (`id_pengeluaran`, `tgl_pengeluaran`, `jumlah`, `keter
 (22, '2025-04-08', 400000, 'kopel satpam', NULL),
 (23, '2025-03-13', 740000, 'peci paskibraka', NULL),
 (24, '2025-02-01', 272000, 'topi paskibra ', NULL),
-(25, '2025-02-04', 112000, 'bet paskib', NULL);
+(25, '2025-02-04', 112000, 'bet paskib', NULL),
+(31, '2026-04-08', 3000, 'karet', NULL);
 
 -- --------------------------------------------------------
 
@@ -395,7 +392,7 @@ ALTER TABLE `uang`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `catatan`
@@ -413,25 +410,25 @@ ALTER TABLE `hutang`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `pemasukan`
 --
 ALTER TABLE `pemasukan`
-  MODIFY `id_pemasukan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_pemasukan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `pembayaran_kas`
 --
 ALTER TABLE `pembayaran_kas`
-  MODIFY `id_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `id_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `sumber`
