@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2026 at 02:49 AM
+-- Generation Time: Apr 22, 2026 at 05:08 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,7 +31,7 @@ CREATE TABLE `admin` (
   `id_admin` int(11) NOT NULL,
   `nama` varchar(40) NOT NULL,
   `email` varchar(40) NOT NULL,
-  `pass` varchar(40) NOT NULL
+  `pass` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
@@ -39,9 +39,9 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `nama`, `email`, `pass`) VALUES
-(1, 'Shandy', 'shandy@gmail.com', 'satria01'),
-(3, 'Aku', 'admin@admin.com', 'admin'),
-(4, 'alya putri iftitah', 'oke@gmail.com', 'satria01'),
+(1, 'Shandy', 'shandy@gmail.com', '$2y$10$ITGUnKfVdWluTOFy8KNmvOO.mICmvyq8i'),
+(3, 'Aku', 'admin@admin.com', '$2y$10$m8qCd6OvqPyBqEWH47Uw.e7S/eCvgb6qr'),
+(4, 'alya putri iftitah', 'oke@gmail.com', '$2y$10$wQNcfDr6Yu5EcYyaJNA2TOpkcP.QDDOadD6uQfgGf4pK9o97T7o8e'),
 (5, 'zulia riska', 'halo@gmail.com', 'satria01'),
 (6, 'zulia riska', 'gatau@gmail.com', 'satria01');
 
@@ -193,6 +193,7 @@ INSERT INTO `pemasukan` (`id_pemasukan`, `tgl_pemasukan`, `jumlah`, `keterangan`
 
 CREATE TABLE `pembayaran_kas` (
   `id_kas` int(11) NOT NULL,
+  `id_karyawan` int(11) DEFAULT NULL,
   `nama` varchar(50) NOT NULL,
   `minggu_1` int(11) DEFAULT 0,
   `minggu_2` int(11) DEFAULT 0,
@@ -203,51 +204,6 @@ CREATE TABLE `pembayaran_kas` (
   `kekurangan` int(11) DEFAULT 0,
   `total` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `pembayaran_kas`
---
-
-INSERT INTO `pembayaran_kas` (`id_kas`, `nama`, `minggu_1`, `minggu_2`, `minggu_3`, `minggu_4`, `bulan`, `dibayar`, `kekurangan`, `total`) VALUES
-(7, 'BELVA ARMIDA AULIA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(8, 'LATIFATUZ ZAHRA RAMANDHANI', 0, 2000, 2000, 2000, 'Juni', 6000, 2000, 8000),
-(9, 'ZIMA KHOLIFATUL MUZZA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(10, 'RESTU BAYU PRATAMA', 0, 2000, 2000, 2000, 'Juni', 6000, 2000, 8000),
-(11, 'MUHAMMAD RAFI RAMADHAN', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(12, 'SATRIO DIMAS PRAYOGA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(13, 'HAFIZATUN NAFSIYAH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(14, 'FARIDAH NABILAH ZAHRAH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(15, 'MAULIDA KHASANAH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(16, 'FRISCA CANDRA AMIRA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(17, 'RIRIN AYU SETIANINGSIH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(18, 'EVA DWI AGUSTIN', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(19, 'LIANA PUTRI WULAN DARI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(20, 'FEBRIANA ARDIA PRAMESTI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(21, 'MILLA APRILLIA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(22, 'AHMAD RIFQI HIDAYAH', 0, 2000, 2000, 2000, 'Juni', 6000, 2000, 8000),
-(23, 'MUHAMMAD SYAFI`I', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(24, 'WAJID MAFIS SONI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(25, 'MUHAMMAD REYHAN YAQDHAN', 0, 0, 0, 0, 'Juni', 0, 8000, 8000),
-(26, 'MUHAMMAD KHAIRUL AZZAM SAIFUL ANAM', 0, 0, 2000, 0, 'Juni', 2000, 6000, 8000),
-(27, 'NOVANTYO WAHYU PRADI SETYANTO', 2000, 2000, 0, 0, 'Juni', 4000, 4000, 8000),
-(28, 'MUHAMMAD RAIHAN AMIN', 2000, 2000, 2000, 0, 'Juni', 6000, 2000, 8000),
-(29, 'AKHDA NURUL AZIZAH', 0, 2000, 2000, 2000, 'Juni', 6000, 2000, 8000),
-(30, 'MAHESA BIMAS EFFENDI', 0, 2000, 2000, 0, 'Juni', 4000, 4000, 8000),
-(31, 'MUHAMMAD GUSNUL ARKHAMUL FIRDAUS', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(32, 'NEYSA AULIA PUTRI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(33, 'FATMA NAILA HUSNA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(34, 'KURNIA NURUL BAROKAH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(48, 'JIHAN RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(49, 'AISYA NAZULA', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(50, 'MOHAMMAD FIKRI ALVIN', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(51, 'DURROTUN NAFISAH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(52, 'AENI SURYANINGTYAS', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(53, 'RIZKIA YULIANA NIKMAH', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(54, 'VANESA PUTRI RAMADHANI', 2000, 2000, 2000, 2000, 'Juni', 8000, 0, 8000),
-(55, 'ALISA SABRINA RIZKI', 0, 2000, 2000, 2000, 'Juni', 6000, 2000, 8000),
-(58, 'saya sendiri', 0, 0, 0, 0, 'Juni', 0, 8000, 8000),
-(61, 'alya ', 2000, 2000, 0, 2000, 'Juni', 6000, 2000, 8000),
-(62, 'alya ', 2000, 2000, 0, 2000, 'Juni', 6000, 2000, 8000);
 
 -- --------------------------------------------------------
 
@@ -363,7 +319,8 @@ ALTER TABLE `pemasukan`
 -- Indexes for table `pembayaran_kas`
 --
 ALTER TABLE `pembayaran_kas`
-  ADD PRIMARY KEY (`id_kas`);
+  ADD PRIMARY KEY (`id_kas`),
+  ADD KEY `id_karyawan` (`id_karyawan`);
 
 --
 -- Indexes for table `pengeluaran`
@@ -422,7 +379,7 @@ ALTER TABLE `pemasukan`
 -- AUTO_INCREMENT for table `pembayaran_kas`
 --
 ALTER TABLE `pembayaran_kas`
-  MODIFY `id_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id_kas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran`
@@ -441,6 +398,16 @@ ALTER TABLE `sumber`
 --
 ALTER TABLE `uang`
   MODIFY `id_uang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `pembayaran_kas`
+--
+ALTER TABLE `pembayaran_kas`
+  ADD CONSTRAINT `pembayaran_kas_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id_karyawan`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

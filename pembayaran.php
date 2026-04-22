@@ -1,5 +1,5 @@
 <?php
-require 'cek-sesi.php';
+require 'secure-session.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,10 +25,9 @@ require 'cek-sesi.php';
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-  <!-- Tailwind CSS, HTMX, AlpineJS -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
-  <script src="//unpkg.com/alpinejs" defer></script>
+  <!-- Select2 for searchable dropdown -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   <style media="print">
     body * { visibility: hidden; }
@@ -179,12 +178,21 @@ while ($row = mysqli_fetch_assoc($queryKas)) {
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                       </div>
                       <div class="modal-body">
-                        <form role="form" action="proses-edit-pembayaran.php" method="get">
+                        <form role="form" action="proses-edit-pembayaran.php" method="post">
                           <input type="hidden" name="id_kas" value="<?php echo $row['id_kas']; ?>">
 
                           <div class="form-group">
                             <label>Nama</label>
-                            <input type="text" name="nama" class="form-control" value="<?php echo htmlspecialchars($row['nama'], ENT_QUOTES, 'UTF-8'); ?>">
+                            <select name="id_karyawan" class="form-control select2-karyawan" style="width: 100%;" required>
+                              <option value="">-- Pilih Karyawan --</option>
+<?php
+$karyawan = mysqli_query($koneksi, "SELECT id_karyawan, nama FROM karyawan ORDER BY nama");
+while ($k = mysqli_fetch_assoc($karyawan)) {
+    $sel = ($row['id_karyawan'] == $k['id_karyawan']) ? 'selected' : '';
+    echo '<option value="'.$k['id_karyawan'].'" '.$sel.'>'.htmlspecialchars($k['nama'], ENT_QUOTES, 'UTF-8').'</option>';
+}
+?>
+                            </select>
                           </div>
 
                           <div class="form-group">
@@ -243,10 +251,18 @@ foreach ($bulanOptions as $b) {
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-              <form action="tambah-pembayaran.php" method="get">
+              <form action="tambah-pembayaran.php" method="post">
                 <div class="form-group">
                   <label>Nama</label>
-                  <input type="text" class="form-control" name="nama" required>
+                  <select name="id_karyawan" class="form-control select2-karyawan" style="width: 100%;" required>
+                    <option value="">-- Pilih Karyawan --</option>
+<?php
+$karyawan = mysqli_query($koneksi, "SELECT id_karyawan, nama FROM karyawan ORDER BY nama");
+while ($k = mysqli_fetch_assoc($karyawan)) {
+    echo '<option value="'.$k['id_karyawan'].'">'.htmlspecialchars($k['nama'], ENT_QUOTES, 'UTF-8').'</option>';
+}
+?>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label>Bulan</label>
@@ -321,9 +337,13 @@ foreach ($bulanOptions as $b) {
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
   <script>
-    function cetakPembayaran() {
-      window.print();
-    }
+    $(document).ready(function() {
+      $('.select2-karyawan').select2({
+        placeholder: 'Cari nama karyawan...',
+        allowClear: true,
+        width: '100%'
+      });
+    });
   </script>
 
 </body>

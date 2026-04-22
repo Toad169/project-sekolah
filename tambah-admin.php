@@ -3,12 +3,22 @@
 // include('dbconnected.php');
 include 'koneksi.php';
 
-$nama = $_GET['nama'];
-$email = $_GET['email'];
-$pass = $_GET['pass'];
+$nama = isset($_POST['nama']) ? trim($_POST['nama']) : '';
+$email = isset($_POST['email']) ? trim($_POST['email']) : '';
+$pass = isset($_POST['pass']) ? $_POST['pass'] : '';
 
-// query update
-$query = mysqli_query($koneksi, "INSERT INTO `admin` (`nama`, `email`, `pass`) VALUES ('{$nama}', '{$email}', '{$pass}')");
+if (empty($nama) || empty($email) || empty($pass)) {
+    header('Location: profile.php?pesan=missing');
+    exit;
+}
+
+$hash = password_hash($pass, PASSWORD_DEFAULT);
+
+// query insert with prepared statement
+$stmt = mysqli_prepare($koneksi, "INSERT INTO `admin` (`nama`, `email`, `pass`) VALUES (?, ?, ?)");
+mysqli_stmt_bind_param($stmt, 'sss', $nama, $email, $hash);
+$query = mysqli_stmt_execute($stmt);
+
 
 if ($query) {
     // credirect ke page index

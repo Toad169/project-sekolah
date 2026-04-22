@@ -1,5 +1,5 @@
 <?php
-require 'cek-sesi.php';
+require 'secure-session.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

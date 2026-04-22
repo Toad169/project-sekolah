@@ -1,5 +1,5 @@
 <?php
-require 'cek-sesi.php';
+require 'secure-session.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +85,18 @@ while ($data = mysqli_fetch_assoc($query)) {
                       <td><?php echo $data['id_admin']; ?></td>
                       <td><?php echo $data['nama']; ?></td>
                       <td><?php echo $data['email']; ?></td>
-                      <td><?php echo $data['pass']; ?></td>
+                      <td><?php
+                          // Do not display raw password. Show masked indicator or 'plaintext' if detected.
+                          $pass = $data['pass'];
+                          if (strpos($pass, '$2y$') === 0 || strpos($pass, '$2a$') === 0 || strpos($pass, '$argon2') === 0) {
+                              echo '******** (hashed)';
+                          } elseif (strlen($pass) > 0) {
+                              // likely plaintext stored
+                              echo '******** (plaintext stored)';
+                          } else {
+                              echo '-';
+                          }
+                      ?></td>
 					  <td>
                     <!-- Button untuk modal -->
 <a href="#" type="button" class=" fa fa-edit btn btn-primary btn-md" data-toggle="modal" data-target="#myModal<?php echo $data['id_admin']; ?>"></a>
@@ -102,7 +113,7 @@ while ($data = mysqli_fetch_assoc($query)) {
 <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <div class="modal-body">
-<form role="form" action="proses-edit-admin.php" method="get">
+<form role="form" action="proses-edit-admin.php" method="post">
 
 <?php
     $id = $data['id_admin'];
@@ -131,8 +142,8 @@ while ($data = mysqli_fetch_assoc($query)) {
 </div>
 
 <div class="form-group">
-<label>Password</label>
-<input type="text" name="pass" class="form-control" value="<?php echo $row['pass']; ?>">      
+<label>Password (leave blank to keep current)</label>
+<input type="password" name="pass" class="form-control" value="">      
 </div>
 
 <div class="modal-footer">  
@@ -165,7 +176,7 @@ while ($data = mysqli_fetch_assoc($query)) {
 		    <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <!-- body modal -->
-		<form action="tambah-admin.php" method="get">
+		<form action="tambah-admin.php" method="post">
         <div class="modal-body">
 		Nama : 
          <input type="text" class="form-control" name="nama">
